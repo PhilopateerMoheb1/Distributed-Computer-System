@@ -1,0 +1,43 @@
+.login_form , .register_form {
+    width: 500px;
+    border: 2px solid #ccc;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+.form_header {
+    font-family: sans-serif;
+    box-sizing: border-box;
+    text-align: center;
+    margin-bottom: 40px;
+}
+.login_label {
+    color: #888;
+    font-size: 18px;
+
+}
+.login_error_p , .reg_error_p{
+    background: #f2dede;
+    color: #a94442;
+    padding: 10px;
+    width: 95%;
+    border-radius: 5px;
+    margin: 20px auto;
+}
+.form_btn{
+    width: 100%;
+    justify-self: center;
+    align-self: center;
+    margin: 0 auto;
+}
+.login_body , .register_body{
+    background-color:cadetblue;
+}
+.reg_sucess_p {
+    background: #b0f7bf;
+    color: #0f7726;
+    padding: 10px;
+    width: 95%;
+    border-radius: 5px;
+    margin: 20px auto;
+}
