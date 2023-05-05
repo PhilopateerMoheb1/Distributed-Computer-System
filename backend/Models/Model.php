@@ -47,5 +47,11 @@ class Model{
 		$stmt = $this->pdo->prepare($query);
 		$stmt->execute($newRow);
 	}
+	public function Update($updated,$update,$where,$wherevalue){
+		$sql = "UPDATE ".$this->name." SET ".$updated."=? WHERE ".$where."="."'".$wherevalue."'";
+		echo $sql;
+		$stmt= $this->pdo->prepare($sql);
+		$stmt->execute([$update]);
+	}
 }
 ?>

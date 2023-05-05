@@ -1,18 +1,18 @@
 <?php
+
+header("Access-Control-Allow-Origin: *");
 require_once("Helpers/Router.php");
 require_once("Helpers/helpers.php");
 require_once("Models/Model.php");
 require_once("Models/slots.php");
 require_once("Validator.php");
 require_once("Models/users.php");
+require_once("Models/products.php");
 require_once("Models/event.php");
 
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Headers: *');
 
 $_POST = json_decode(file_get_contents('php://input'));
 $_POST = convert_object_to_array($_POST);
-
 
 
 
@@ -30,11 +30,27 @@ $router->get("/event/{event}", function($args){
 
 
 $router->get("/events", function(){
+    echo"HIIIIIIIIIIIIIIII";
     $eventModel = new event();
     echo json_encode($eventModel->getAll());
 
 });
+$router->get("/users", function(){
+    $usermodel = new users();
+    echo json_encode($usermodel->getAll());
+});
 
+$router->post("/transaction", function(){
+    $usermodel = new users();
+    // echo json_encode($usermodel->getAll());
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    $usermodel->Update($_POST[0],$_POST[1],$_POST[2],$_POST[3]);
+});
+$router->get("/products", function(){
+    $productmodel = new products();
+    echo json_encode($productmodel->getAll());
+});
 
 $router->route();
 

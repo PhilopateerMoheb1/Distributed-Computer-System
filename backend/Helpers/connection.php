@@ -3,7 +3,7 @@ class Connection{
 				private static $pdo;
 				// connection values
 				private static $host = "localhost";
-				private static $dbname = "pirates";
+				private static $dbname = "test_db";
 				private static $user = "root";
 				private static $pass = "";
 				// make constructor private for singleton pattern
