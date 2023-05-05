@@ -1,4 +1,14 @@
+
+import swal from 'sweetalert2'
+import React, { useEffect, useState } from "react";
+import axios from 'axios';
+let usermoney = 100
+
+
+
 function Product(props){
+
+
     return(
         <div class="card">
         <div class="card__title">
@@ -11,13 +21,16 @@ function Product(props){
           <div class="half">
             <div class="featured_text">
               <p class="sub">{props.name}</p>
-              <p class="price">$210.00</p>
+              <p class="price">{props.Proudct_Price} L.E.</p>
             </div>
             <div class="image">
               <img src={props.img} alt=""/>
             </div>
           </div>
           <div class="half">
+          <div class="featured_text">
+              <p class="sub second">Product Description</p>
+            </div>
             <div class="description">
               <p>{props.description}</p>
             </div>
@@ -34,14 +47,7 @@ function Product(props){
             </div>
           </div>
         </div>
-        <div class="card__footer">
-          <div class="recommend">
-            <p>Recommended by</p>
-            <h3>Andrew Palmer</h3>
-          </div>
-          <div class="action">
-            <button type="button">Buy!</button>
-          </div>
+        <div class="card__footer fake">
         </div>
       </div>
     );
