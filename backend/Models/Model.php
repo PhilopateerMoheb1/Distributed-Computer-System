@@ -58,7 +58,7 @@ class Model
 		}
 		$query = rtrim($query, ",");
 		$query = $query . ");";
-
+		echo $query;
 		// run the query
 		$stmt = $this->pdo->prepare($query);
 		$stmt->execute($newRow);

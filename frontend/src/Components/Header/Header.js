@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Nav, Button, Form, Container} from 'react-bootstrap';
 import Slider from "@mui/material/Slider";
-import Logo from "../Assets/svg/Color logo with background.svg";
+import Logo from "../../Assets/svg/Color logo with background.svg";
 import axios from 'axios';
 import './Header.css';
 
