@@ -50,7 +50,7 @@ export default function ProductPage(){
                             description={Productdata.Product_Description}
                             // description = "I wouldn't know where to start sweet music playing in the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heartin the dark, you steal my foolish heart don't ruin this on me I wouldn't know whereeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
                             img={Productdata.Product_Picture}
-                            Proudct_Price={Productdata.Proudct_Price}
+                            Product_Price={Productdata.Product_Price}
                             />
         <div class="card"> 
         <div class="card__footer real">

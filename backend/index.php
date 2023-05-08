@@ -23,33 +23,44 @@ $router = new Router($base);
 
 
 
-$router->get("/event/{event}", function($args){
-	$eventModel = new event();
-    echo json_encode($eventModel->getBy("Name",str_replace("%20"," ",$args["event"])));
+$router->get("/event/{event}", function ($args) {
+    $eventModel = new event();
+    echo json_encode($eventModel->getBy("Name", str_replace("%20", " ", $args["event"])));
 });
 
 
-$router->get("/events", function(){
-    echo"HIIIIIIIIIIIIIIII";
+$router->get("/events", function () {
+    echo "HIIIIIIIIIIIIIIII";
     $eventModel = new event();
     echo json_encode($eventModel->getAll());
 
 });
-$router->get("/users", function(){
+$router->get("/users", function () {
     $usermodel = new users();
     echo json_encode($usermodel->getAll());
 });
 
-$router->post("/transaction", function(){
+$router->post("/transaction", function () {
     $usermodel = new users();
     // echo json_encode($usermodel->getAll());
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
-    $usermodel->Update($_POST[0],$_POST[1],$_POST[2],$_POST[3]);
+    $usermodel->Update($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
 });
-$router->get("/products", function(){
+$router->get("/products", function () {
     $productmodel = new products();
     echo json_encode($productmodel->getAll());
+});
+
+$router->post("/search", function () {
+    $productmodel = new products();
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    $category = $_POST["category"];
+    $min = $_POST["range"][0];
+    $max = $_POST["range"][1];
+    $regex = '%' . $_POST["search"] . '%';
+    echo json_encode($productmodel->getLike($regex, $category, $min, $max));
 });
 
 $router->route();
