@@ -15,13 +15,15 @@ export default function AddListing(){
         const id = event.target.id;
 
         var value = document.getElementById(id).value;
+        console.log(value);       
 
         setInputs(values => ({...values,[name]: value}));
     }
 
     const handleChange = (event) => {
         const name = event.target.name;
-        const value = event.target.value;       
+        const value = event.target.value;
+        console.log(value);       
         setInputs(values => ({...values,[name]: value}));
     }
 
@@ -60,9 +62,9 @@ export default function AddListing(){
                 <label for="description">Description:</label>
                 <textarea onChange={handleChange} id="description" name="Product_Description" required></textarea>
 
-                <label for="job">Category:</label>
+                <label for="category">Category:</label>
                 <select onChange={handleSelect} id="category" name="Category" required>
-                    <option selected="selected" value="all">All</option>
+                    <option value="all">All</option>
                     <option value="devices">Devices</option>
                     <option value="fashion">Fashion</option>
                     <option value="arts">Arts</option>

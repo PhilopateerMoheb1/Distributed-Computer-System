@@ -75,6 +75,7 @@ $router->post("/upload", function () {
     $quantity = $_POST["Quantity_Available"];
     $description = $_POST["Product_Description"];
     $category = $_POST["Category"];
+    echo $category;
     $image = $_POST["Product_Picture"];
     $DIR = "./images/";
     $file_chunks = explode(";base64,", $image);

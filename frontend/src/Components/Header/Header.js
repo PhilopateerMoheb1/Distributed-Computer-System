@@ -72,7 +72,7 @@ export default function Header(){
                             navbarScroll>
                             <Form onSubmit={handleSubmit} className="mt-auto mt-xs-5 d-flex Header-Navbar-Search">
                             <div className="styled">
-                            <select onChange={handleSelect} id="category" name="category">
+                            <select onChange={handleSelect} id="searchcategory" name="category">
                                 <option selected="selected" value="all">All</option>
                                 <option value="devices">Devices</option>
                                 <option value="fashion">Fashion</option>
