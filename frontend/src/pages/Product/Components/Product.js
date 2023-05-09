@@ -1,55 +1,74 @@
 
 import swal from 'sweetalert2'
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useRef} from "react";
 import axios from 'axios';
-let usermoney = 100
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+let usermoney = 100;
 
 
 function Product(props){
 
+  const handleClick = () => {
+
+    axios.get('http://localhost:80/users')
+        .then(function (response) {
+            let balance = response.data[0].Cash_Balance
+            if(balance>=Productdata.Product_Price){
+                let inputs = ["Cash_Balance",response.data[0].Cash_Balance-Productdata.Product_Price,"Name",response.data[0].Name]
+                axios.post('http://localhost:80/transaction',inputs);
+            
+              swal.fire(
+                'Done!',
+                'Your Transaction Was Successful!',
+                'success'
+              )
+              
+            }
+            else{
+              swal.fire({
+                title: "Failed!",
+                text: 'insufficient Funds In Wallet',
+                icon: 'error'
+            }).then(function() {
+                window.location = "CreditCard";
+            });
+            }
+        })
+  }
+  const [Productdata,setData] = useState([]);
+  useEffect(()=>{
+      axios.get('http://localhost:80/products')
+      .then(function (response) {
+          setData(response.data[0])
+          console.log(response.data[0])
+      })
+  },[]);
 
     return(
-        <div class="card">
-        <div class="card__title">
-          <div class="icon">
-            <a href="#"><i class="fa fa-arrow-left"></i></a>
-          </div>
-          <h3>New products</h3>
-        </div>
-        <div class="card__body">
-          <div class="half">
-            <div class="featured_text">
-              <p class="sub">{props.name}</p>
-              <p class="price">{props.Proudct_Price} L.E.</p>
+      <div class ="productBody">
+
+        <section class="py-5 productFrame">
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="row gx-4 gx-lg-5 align-items-center">
+                    <div class="col-md-6"><img class=" productIMG mb-5 mb-md-0" src="https://www.tech-critter.com/wp-content/uploads/IBMPS1.jpg" alt="..." /></div>
+                    <div class="col-md-6">
+                        <div class="small mb-1">Category: {props.category}</div>
+                        <h1 class="display-5 fw-bolder">{props.name}</h1>
+                        <div class="fs-5 mb-5">
+                            <span>{props.Product_Price} L.E.</span>
+                        </div>
+                        <p class="lead">{props.description}</p>
+                        <div class="d-flex">
+                            <div class="buttons"> <button class="btn btn-outline-warning btn-long cart">Add to Cart</button> <button onClick={handleClick} class="btn btn-warning btn-long buy">Buy it Now</button>  </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="image">
-              <img src={props.img} alt=""/>
-            </div>
-          </div>
-          <div class="half">
-          <div class="featured_text">
-              <p class="sub second">Product Description</p>
-            </div>
-            <div class="description">
-              <p>{props.description}</p>
-            </div>
-            <span class="stock"><i class="fa fa-pen"></i> In stock</span>
-            <div class="reviews">
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star-o"></i></li>
-              </ul>
-              <span>(64 reviews)</span>
-            </div>
-          </div>
-        </div>
-        <div class="card__footer fake">
-        </div>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="js/scripts.js"></script>
       </div>
+      
     );
 }
 

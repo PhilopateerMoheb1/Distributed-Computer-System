@@ -11,7 +11,7 @@ export default function Header(){
     const [range, setRange] = React.useState([0, 1000]);
     const [inputs,setInputs] = useState({});
     const [data,setData] = useState([]);
-    let seller = false;
+    let seller = true;
 
     useEffect(()=>{
         setInputs(values => ({...values,["range"]: [0, 1000]}));
@@ -57,7 +57,7 @@ export default function Header(){
         <div className="Header">
             <Navbar className = "Header-Navbar" variant="dark" fixed="top" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="#"><img
+                    <Navbar.Brand href="./"><img
                         alt="Trustify"
                         src={Logo}
                         width="200 rem"
@@ -115,9 +115,9 @@ export default function Header(){
                         className="m-auto my-2 my-lg-0"
                         style={{ maxHeight: '100px',width:'20%'}}
                         navbarScroll>
-                            {seller?<Nav.Link  style={{color:"white"}} className="m-auto" href="#deets">Add Listing</Nav.Link>:null}
-                            <Nav.Link  style={{color:"white"}} className="m-auto" href="#deets">Profile</Nav.Link>
-                            <Nav.Link style={{color:"white"}} className="m-auto" href="#memes">Cart</Nav.Link>
+                            {seller?<Nav.Link  style={{color:"white"}} className="m-auto" href="/AddListing">Add Listing</Nav.Link>:null}
+                            <Nav.Link  style={{color:"white"}} className="m-auto" href="/Profile">Profile</Nav.Link>
+                            <Nav.Link style={{color:"white"}} className="m-auto" href="/Cart">Cart</Nav.Link>
                         </Nav>
                         </Navbar.Collapse>
                 </Container>
