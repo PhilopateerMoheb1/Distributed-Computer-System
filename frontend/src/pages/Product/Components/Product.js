@@ -50,7 +50,7 @@ function Product(props){
         <section class="py-5 productFrame">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
-                    <div class="col-md-6"><img class=" productIMG mb-5 mb-md-0" src="https://www.tech-critter.com/wp-content/uploads/IBMPS1.jpg" alt="..." /></div>
+                    <div class="col-md-6"><img class=" productIMG mb-5 mb-md-0" src={props.img} alt="..." /></div>
                     <div class="col-md-6">
                         <div class="small mb-1">Category: {props.category}</div>
                         <h1 class="display-5 fw-bolder">{props.name}</h1>

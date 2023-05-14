@@ -5,7 +5,6 @@ import axios from 'axios';
 import SupportedCards from "./Cards";
 import 'bootstrap/dist/css/bootstrap.css';
 import "./styles.css";
-import Header from "../../Components/Header/Header";
 import {
   formatCreditCardNumber,
   formatCVC,
@@ -87,7 +86,6 @@ export default class App extends React.Component {
     return (
       
       <div key="Payment" class="Payment">
-        <Header/>
         <div className="App-payment">
           <h1 class="creditH1">Credit Card Form</h1>
           <h4 class="creditH4">Please Fill out The Form in Order to Buy Tokens</h4>

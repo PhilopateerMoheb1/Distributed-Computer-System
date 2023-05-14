@@ -1,6 +1,5 @@
 import React, { useEffect, useState,useRef } from "react";
 import "./AddListing.css"
-import Header from "../../Components/Header/Header";
 import ImageUpload from "../../Components/ImageUpload"
 import axios from 'axios';
 import swal from 'sweetalert2'
@@ -41,7 +40,6 @@ export default function AddListing(){
 
     return(
         <div className="AddListing">
-            <Header/>
             <form className="AddListing-form" onSubmit={handleSubmit}>
         
                 <h1>Add Listing</h1>

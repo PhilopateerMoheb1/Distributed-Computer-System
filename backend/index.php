@@ -32,12 +32,7 @@ $router->get("/event/{event}", function ($args) {
 });
 
 
-$router->get("/events", function () {
-    echo "HIIIIIIIIIIIIIIII";
-    $eventModel = new event();
-    echo json_encode($eventModel->getAll());
 
-});
 $router->get("/users", function () {
     $usermodel = new users();
     echo json_encode($usermodel->getAll());

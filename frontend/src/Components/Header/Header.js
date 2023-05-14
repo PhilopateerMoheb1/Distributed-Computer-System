@@ -116,7 +116,7 @@ export default function Header(){
                         style={{ maxHeight: '100px',width:'20%'}}
                         navbarScroll>
                             {seller?<Nav.Link  style={{color:"white"}} className="m-auto" href="/AddListing">Add Listing</Nav.Link>:null}
-                            <Nav.Link  style={{color:"white"}} className="m-auto" href="/Profile">Profile</Nav.Link>
+                            <Nav.Link  style={{color:"white"}} className="m-auto" href="./userInfo">Profile</Nav.Link>
                             <Nav.Link style={{color:"white"}} className="m-auto" href="/Cart">Cart</Nav.Link>
                         </Nav>
                         </Navbar.Collapse>
