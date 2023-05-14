@@ -38,22 +38,6 @@ export default function Transactions(){
           </a>
         </li>
       </ul>
-
-      <div class="dropdown" style={{position: "fixed",bottom: "30px"}}>
-        <hr style={{width: "240px"}}/>
-        <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-          <img src={require("../images/user-img.jpg")} alt="" width="32" height="32" class="rounded-circle me-2 user-icon"/>
-        </a>
-
-        <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-          <li><a class="dropdown-item" href="#">Add Order</a></li>
-          <li><a class="dropdown-item" href="#">Edit Info</a></li>
-          <li>
-            <hr class="dropdown-divider"/>
-          </li>
-          <li><a class="dropdown-item" href="#">Sign out</a></li>
-        </ul>
-      </div>
     </div>
 
     <div class="b-example-divider b-example-vr"></div>
