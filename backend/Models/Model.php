@@ -53,11 +53,18 @@ class Model
 
 	public function getLike($regex, $category, $min, $max)
 	{
-		$sql = "SELECT * FROM " . $this->name . " WHERE  Category =? AND (Product_Price BETWEEN " . $min . " AND " . $max . ") AND Product_Name LIKE ?;";
-		$stmt = $this->pdo->prepare($sql);
 		$arr = [];
-		array_push($arr, $category);
-		array_push($arr, $regex);
+		if($category === "all"){
+			$sql = "SELECT * FROM " . $this->name . " WHERE (Product_Price BETWEEN " . $min . " AND " . $max . ") AND Product_Name LIKE ?;";
+			$stmt = $this->pdo->prepare($sql);		
+			array_push($arr, $regex);
+		}
+		else{
+			$sql = "SELECT * FROM " . $this->name . " WHERE  Category =? AND (Product_Price BETWEEN " . $min . " AND " . $max . ") AND Product_Name LIKE ?;";
+			$stmt = $this->pdo->prepare($sql);
+			array_push($arr, $category);
+			array_push($arr, $regex);
+		}
 		$stmt->execute($arr);
 		return $stmt->fetchAll();
 	}

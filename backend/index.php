@@ -62,6 +62,9 @@ $router->post("/newtransaction", function () {
     $_POST = convert_object_to_array($_POST);
     if($_POST[0]=="Cash_Balance"){
         $usermodel->Update($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
+        if(isset($_SESSION["Cash_Balance"])){
+            $_SESSION["Cash_Balance"]=$_POST[1];
+        }
     }
     else{
         $productmodel->Update($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
@@ -131,6 +134,11 @@ $router->post("/register", function () {
 
 $router->get("/session", function () {
     echo json_encode($_SESSION);
+});
+
+$router->get("/logout", function () {
+    session_unset();
+    session_destroy();
 });
 
 $router->post("/upload", function () {
