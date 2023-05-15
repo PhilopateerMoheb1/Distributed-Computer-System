@@ -45,6 +45,7 @@
         // validate phone
         //$test = "+201201304860";
         //echo $test . "<br>" . (preg_match('/^[+][0-9]{9,14}+$/', $test)||preg_match('/^[0-9]{9,14}+$/', $test)) . "<br>";
+        
         if ( !(preg_match('/^[+][0-9]{9,14}+$/', $phone)||preg_match('/^[0-9]{9,14}+$/', $phone)) ){
             $errphone = "phone must be numbers only";
         }
@@ -54,13 +55,13 @@
         // echo $address . "<br>";
         // echo preg_match($specialChcAddr, "5st gamal,55a#") . "<br>";
         if(preg_match($specialChcAddr, $address)){
-            $erraddress = "unvalid address";
+            $erraddress = "invalid address";
         }
         // validate Email
         $specialChcEmail = "/[\'^£$%&*()}{#~?><>,|=_+¬-]/";
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($email) || preg_match($specialChcEmail, $email)) {
-            $erremail = "unvalid email address";
+            $erremail = "invalid email address";
         }
                 //------- check if this email is exist
         else{
