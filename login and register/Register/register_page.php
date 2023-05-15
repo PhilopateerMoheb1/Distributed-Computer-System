@@ -149,10 +149,10 @@
             <div class="mb-3 justify-content-center align-items-center">
                 <button type="submit" class="btn btn-outline-primary form_btn">Register</button>
                 <br><br>
-                
+                <label>have an account? </label>
                 <a href="../Login/login_page.php" class="new_user_link">
                     <button type="button" class="btn btn-outline-primary form_btn">
-                        have an account? Login
+                        Login
                     </button>
                 </a>
             </div>
