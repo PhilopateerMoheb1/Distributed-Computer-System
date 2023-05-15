@@ -49,6 +49,10 @@
         if ( !(preg_match('/^[+][0-9]{9,14}+$/', $phone)||preg_match('/^[0-9]{9,14}+$/', $phone)) ){
             $errphone = "phone must be numbers only";
         }
+        $checkphone = mysqli_query($connection,"SELECT * FROM users WHERE Phone_Number = '$phone'");
+        if (mysqli_num_rows($checkphone)){
+            $errphone = "This phone is already exist!";
+        }
 
         // validate address
         $specialChcAddr = "/[\'^£$%&*()}{@#~?><>|=_+¬]/";
