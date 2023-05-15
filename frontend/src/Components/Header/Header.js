@@ -1,24 +1,31 @@
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {Navbar, Nav, Button, Form, Container} from 'react-bootstrap';
+import {Navbar, Nav, Button, Form, Container,NavDropdown} from 'react-bootstrap';
 import Slider from "@mui/material/Slider";
 import Logo from "../../Assets/svg/Color logo with background.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
 import './Header.css';
+import icon from "../../Assets/png/profile-dropdown.png"
+import coin from "../../Assets/25498.jpg"
 
 export default function Header(){
 
+    axios.defaults.withCredentials = true;
+
     const [range, setRange] = React.useState([0, 1000]);
     const [inputs,setInputs] = useState({});
-    const [data,setData] = useState([]);
-    let seller = true;
+    const [data,setData] = useState({});
 
     useEffect(()=>{
         setInputs(values => ({...values,["range"]: [0, 1000]}));
+        setInputs(values => ({...values,["category"]: "all"}));
         axios.get('http://localhost:80/session')     
             .then((response) => {
-                if (response.data === 'Valid') {
-                seller=true;
+                var objectConstructor = ({}).constructor;
+                console.log(response)
+                if (response.data.constructor === objectConstructor) {
+                    setData(response.data);
                 }
             })
             .catch((err) => {
@@ -30,6 +37,12 @@ export default function Header(){
         const name = event.target.name;
         const value = event.target.value;       
         setInputs(values => ({...values,[name]: value}));
+    }
+
+    const handleLogout = (event) => {
+        axios.get('http://localhost:80/logout').then(function (response) {
+            window.location = "./";
+        });
     }
 
     const handleSelect = (event) => {
@@ -111,14 +124,42 @@ export default function Header(){
                             <Button type="submit" className="Header-Button mx-auto btn-primary" >Search</Button>
                             </Form>
                         </Nav>
+                        {data.constructor ===({}).constructor && "ID" in data ?
                         <Nav
                         className="m-auto my-2 my-lg-0"
-                        style={{ maxHeight: '100px',width:'20%'}}
+                        style={{ maxHeight: '400px',maxWidth:'50%'}}
                         navbarScroll>
-                            {seller?<Nav.Link  style={{color:"white"}} className="m-auto" href="/AddListing">Add Listing</Nav.Link>:null}
-                            <Nav.Link  style={{color:"white"}} className="m-auto" href="/userInfo">Profile</Nav.Link>
-                            <Nav.Link style={{color:"white"}} className="m-auto" href="/Cart">Cart</Nav.Link>
+                        <NavDropdown className="justify-content-center"
+                         title=<div className="pull-left">
+                                <img className="thumbnail-image" 
+                                    src={icon} 
+                                    alt="user"
+                                    style={{width:"3rem"}}
+                                />
+                            </div> id="navbarScrollingDropdown">
+                            <NavDropdown.Item href="/userInfo">Profile</NavDropdown.Item>
+                            {data.Role==="Seller"?<NavDropdown.Item href="/AddListing">AddListing</NavDropdown.Item>:null}
+                            <NavDropdown.Item href="/Cart">Cart</NavDropdown.Item>
+                            <NavDropdown.Item href="/CreditCard">{data.Cash_Balance}<img className="thumbnail-image" 
+                                    src={coin} 
+                                    alt="dollars"
+                                    style={{width:"3rem"}}
+                                /></NavDropdown.Item>
+                            <NavDropdown.Divider />
+                            <NavDropdown.Item onClick={handleLogout}>
+                                Logout
+                        </NavDropdown.Item>
+                        </NavDropdown>
                         </Nav>
+                        : <Nav
+                        className="m-auto my-2 my-lg-0"
+                        style={{ maxHeight: '400px',width:'20%'}}
+                        navbarScroll>
+                            <Nav.Link  style={{color:"white"}} className="m-auto" href="/login">Login</Nav.Link>
+                            <Nav.Link  style={{color:"white"}} className="m-auto" href="/Register">Register</Nav.Link>
+                            <Nav.Link style={{color:"white"}} className="m-auto" href="/Cart">Cart</Nav.Link>
+                        </Nav> }
+                        
                         </Navbar.Collapse>
                 </Container>
             </Navbar>

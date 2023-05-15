@@ -45,11 +45,13 @@ export default function AddListing(){
         axios.post('http://localhost:80/upload',inputs).then(function (response) {
             console.log(response.data[0]);
         });
-        swal.fire(
-            'Done!',
-            'Listing Added!',
-            'success'
-        )
+        swal.fire({
+            title: "Done!",
+            text: 'Listing Added!',
+            icon: 'success'
+        }).then(function() {
+            window.location = "http://localhost:3000/";
+        });
     }
 
     return(

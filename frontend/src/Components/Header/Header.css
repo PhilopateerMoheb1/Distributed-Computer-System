@@ -1,3 +1,33 @@
+#navbarScrollingDropdown{
+    margin-right:3.5rem;
+    display:grid;
+    place-items:center;
+}
+
+.pull-left{
+    margin-left:3.5rem;
+    margin-bottom:0.25rem;
+}
+
+.dropdown-toggle::after {
+    display: none !important; 
+}
+
+@media screen and (max-width: 992px) {
+
+    .pull-left{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        margin-bottom:0.25rem;
+    }
+  
+    #navbarScrollingDropdown{
+        text-align:center
+    }
+  
+  }
+
 .Header{
     padding: 0;
 }

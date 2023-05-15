@@ -2,17 +2,12 @@
 
 
 .productBody{
-	height: 100vh;
+	min-height: 100vh;
     width: 100vw;
 	margin-top: 100px;
 	padding: 0;
     position: relative;
 }
-
-
-
-
-
 
 
 .productIMG {
