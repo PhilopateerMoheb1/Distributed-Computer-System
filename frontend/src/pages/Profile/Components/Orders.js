@@ -14,10 +14,7 @@ export default function Orders(){
           if("ID" in response.data){
             axios.post('http://localhost:80/getlistings',response.data.ID)
             .then(function (response) {               
-                  axios.post('http://localhost:80/listings',response.data)
-                  .then(function(response) {
                     setData(response.data)
-                  })
             })
           }
       }

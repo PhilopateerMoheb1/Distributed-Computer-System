@@ -103,18 +103,7 @@ $router->post("/product", function () {
     $query = $query . ")";
     print_r(json_encode($productmodel->getByInTransaction("PID",$query)));
 });
-$router->post("/listings", function () {
-    $productmodel = new products();
-    $_POST = json_decode(file_get_contents('php://input'));
-    $_POST = convert_object_to_array($_POST);
-    $query = "(";
-    foreach ($_POST as  &$value) {
-        $query = $query . $value["PID"] . ",";
-    }
-    $query = substr($query, 0, -1);
-    $query = $query . ")";
-    print_r(json_encode($productmodel->getByIn("PID",$query)));
-});
+
 
 $router->post("/search", function () {
     $productmodel = new products();
