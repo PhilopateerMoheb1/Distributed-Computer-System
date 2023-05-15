@@ -38,7 +38,7 @@
 
         // validate Name
         //echo $name;
-        if (!preg_match ("/^[a-zA-z ]*$/", $name) ) {  
+        if (!preg_match ("/^[a-zA-z ]*$/", $name) or strlen($name) == 0) {  
             $errname = "Only alphabets and whitespace are allowed.";  
         }
 
@@ -63,7 +63,7 @@
             $erraddress = "invalid address";
         }
         // validate Email
-        $specialChcEmail = "/[\'^£$%&*()}{#~?><>,|=_+¬-]/";
+        $specialChcEmail = "/[\'^£$%&*()}{#~?><>,|=_+¬-]!/";
 
         if (!filter_var($email, FILTER_VALIDATE_EMAIL) || empty($email) || preg_match($specialChcEmail, $email)) {
             $erremail = "invalid email address";
