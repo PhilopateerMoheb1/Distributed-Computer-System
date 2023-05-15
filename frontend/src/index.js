@@ -17,7 +17,7 @@ import TransactionsPage from './pages/Profile/TransactionsPage';
 import RootLayout from './pages/Routes/RootLayout';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
-
+import SearchResult from './pages/SearchResults/SearchResult';
 
 
 
@@ -32,6 +32,7 @@ const router = createBrowserRouter(
       <Route path="/orders"  element = {<OrdersInfoPage/>}/>
       <Route path="/login"  element = {<Login/>}/>
       <Route path="/Register"  element = {<Register/>}/>
+      <Route path="/SearchResult"  element = {<SearchResult/>}/>
       <Route path="/Products/:id"  element = {<Product/>}/>
     </Route>
   )
