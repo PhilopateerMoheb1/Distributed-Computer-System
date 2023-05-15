@@ -35,12 +35,12 @@
             </div>
 
             <div class="mb-3 justify-content-center align-items-center">
-                <button type="submit" class="btn btn-outline-primary form_btn">Submit</button>
+                <button type="submit" class="btn btn-outline-primary form_btn">login</button>
                 <br><br>
-                
+                <label>new user?</label>
                 <a href="../Register/register_page.php" class="new_user_link">
                     <button type="button" class="btn btn-outline-primary form_btn">
-                        new user? Register
+                        Register
                     </button>
                 </a>
             </div>
