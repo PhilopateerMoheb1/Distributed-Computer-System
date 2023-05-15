@@ -45,14 +45,14 @@ export default function Home(){
                         <div class="px-0 px-lg-3">
                             <Mouse size={115} />
                             <h3 class="h5">One Click Away</h3>
-                            <p class="text-muted">Your datas will be ordered just by one click. You can save your time. What are you waiting for!</p>
+                            <p class="text-muted">Your items will be ordered just by one click. You can save your time. What are you waiting for!</p>
                         </div>
                     </div>
                     <div class="mb-3 mb-lg-0 text-center col-lg-4">
                         <div class="px-0 px-lg-3">
                             <FontAwesomeIcon icon={faShieldAlt} size="7x" />
                             <h3 class="h5">Buy with confidence</h3>
-                            <p class="text-muted">You can go shopping safely. Everything is safe and secure. Your items is encrypted</p>
+                            <p class="text-muted">You can go shopping safely. Everything is safe and secure. Your data is encrypted</p>
                         </div>
                     </div>
                 </div>
@@ -61,6 +61,7 @@ export default function Home(){
             <div className="home-products py-5">
                 <div className="container px-4 px-lg-5 mt-5">
                     <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        
                     {
                                   data.map((dataItem,index)=>{
                                     return(
@@ -75,8 +76,6 @@ export default function Home(){
                                     );
             
                                 })}
-                    
-
 
                     </div>
                 </div>
