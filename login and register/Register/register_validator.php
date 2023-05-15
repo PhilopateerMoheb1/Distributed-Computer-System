@@ -128,7 +128,7 @@
 
             $Role_aa = array("User"=>"0", "Seller"=>"1"); 
             $sql_Insert = "INSERT INTO users(Name, Address, Phone_Number, Email, Password, Gender, DOB, Role, Cash_Balance) 
-                                    VALUES('$name', '$address', '$phone', '$email', '$hashed_pass', '$gender', '$dob', '$Role_aa[$role]', '4000')";
+                                    VALUES('$name', '$address', '$phone', '$email', '$hashed_pass', '$gender', '$dob', '$Role_aa[$role]', '0')";
             $result = mysqli_query($connection, $sql_Insert);
             if ($result){
                 header("Location: register_page.php?sucess=Your Account has been registered successfully!");
