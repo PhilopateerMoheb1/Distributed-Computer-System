@@ -16,6 +16,7 @@ import OrdersInfoPage from './pages/Profile/OrdersInfoPage';
 import TransactionsPage from './pages/Profile/TransactionsPage';
 import RootLayout from './pages/Routes/RootLayout';
 import Login from './pages/Login/Login';
+import Register from './pages/Register/Register';
 
 
 
@@ -30,16 +31,16 @@ const router = createBrowserRouter(
       <Route path="/transactions"  element = {<TransactionsPage/>}/>
       <Route path="/orders"  element = {<OrdersInfoPage/>}/>
       <Route path="/login"  element = {<Login/>}/>
+      <Route path="/Register"  element = {<Register/>}/>
       <Route path="/Products/:id"  element = {<Product/>}/>
     </Route>
-
   )
 );
 
 const root = ReactDOM.createRoot(document.getElementById('root'));        
 root.render( 
-  // <React.StrictMode>
+  <React.StrictMode>
   <RouterProvider router={router} />
-  //  {/* <Login/>  */}
-  // </React.StrictMode>
+    {/* <Login/> */}
+  </React.StrictMode>
 );

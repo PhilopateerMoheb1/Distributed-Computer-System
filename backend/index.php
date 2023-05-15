@@ -123,6 +123,12 @@ $router->post("/login", function () {
     echo json_encode($_SESSION);
 });
 
+$router->post("/register", function () {
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    validateRegister();
+});
+
 $router->get("/session", function () {
     echo json_encode($_SESSION);
 });

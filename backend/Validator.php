@@ -68,17 +68,14 @@ function isValidDateBirth()
 
 function validateRegister()
 {
-    $_POST['Role'] = "user";
     unset($_POST['ConfirmPassword']);
+    $_POST['Cash_Balance']="1000";
+    $_POST['Password']=md5($_POST['Password']);
     $UserModel = new users();
     $read = $UserModel->getAll();
     $columnArray = array_column($read, 'Email');
 
-
     $isValidated = true;
-
-    $isValidated = isEmpty();
-    $isValidated = isValidDateBirth();
 
     if (in_array($_POST['Email'], $columnArray)) {
 
@@ -88,6 +85,7 @@ function validateRegister()
 
     if ($isValidated) {
         $UserModel->insert($_POST);
+        echo "success";
     }
 
 }

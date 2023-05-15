@@ -16,11 +16,12 @@ export default function Login(){
         setInputs(values => ({...values,["range"]: [0, 1000]}));
         axios.get('http://localhost:80/session').then(
             (response) => {
-                console.log(response)
-                if("ID" in response.data){
-                    console.log("logged in");
-                    window.location = "./";
-                    //how to access data ? if logged in name=response.data["name"]
+                var objectConstructor = ({}).constructor;
+                if(response.data.constructor === objectConstructor){
+                    if("ID" in response.data){
+                        console.log("logged in");
+                        window.location = "./";
+                    }
                 }
             }
         );
@@ -35,11 +36,20 @@ export default function Login(){
     const handleSubmit = (event) =>{
         event.preventDefault();
         axios.post('http://localhost:80/login',inputs).then(function (response) {
-            if("ID" in response.data){
-                console.log("in")
-                window.location = "./";
+            var objectConstructor = ({}).constructor;
+            if(response.data.constructor === objectConstructor){
+                if("ID" in response.data){
+                    console.log("logged in");
+                    window.location = "./";
+                }
             }
-            console.log("out2")
+            else{ 
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: response.data.slice(0,-2),
+                  })
+            }
         });
     }
    
