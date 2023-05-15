@@ -51,14 +51,15 @@
         }
         $checkphone = mysqli_query($connection,"SELECT * FROM users WHERE Phone_Number = '$phone'");
         if (mysqli_num_rows($checkphone)){
+            
             $errphone = "This phone is already exist!";
         }
 
         // validate address
-        $specialChcAddr = "/[\'^£$%&*()}{@#~?><>|=_+¬]/";
+        $specialChcAddr = "/[\'^£$%&*()}{@#~?><>|=_+¬]!/";
         // echo $address . "<br>";
         // echo preg_match($specialChcAddr, "5st gamal,55a#") . "<br>";
-        if(preg_match($specialChcAddr, $address)){
+        if(preg_match($specialChcAddr, $address) or strlen($address) == 0){
             $erraddress = "invalid address";
         }
         // validate Email
@@ -128,7 +129,7 @@
 
             $Role_aa = array("User"=>"0", "Seller"=>"1"); 
             $sql_Insert = "INSERT INTO users(Name, Address, Phone_Number, Email, Password, Gender, DOB, Role, Cash_Balance) 
-                                    VALUES('$name', '$address', '$phone', '$email', '$hashed_pass', '$gender', '$dob', '$Role_aa[$role]', '0')";
+                                    VALUES('$name', '$address', '$phone', '$email', '$hashed_pass', '$gender', '$dob', '$Role_aa[$role]', '4000')";
             $result = mysqli_query($connection, $sql_Insert);
             if ($result){
                 header("Location: register_page.php?sucess=Your Account has been registered successfully!");
