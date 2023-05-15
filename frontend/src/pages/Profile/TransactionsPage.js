@@ -6,9 +6,7 @@ export default function UserInfoPage(){
 
     return(  
         <div className="ProfileContainer">
-
         <Transactions/>
-        
         </div>
     );
 }

@@ -1,24 +1,27 @@
 import React, { useEffect, useState,useRef } from "react";
-import "./Home.css"
+import "../Home/Home.css"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faShieldAlt } from '@fortawesome/free-solid-svg-icons';
-import { faHome } from '@fortawesome/free-solid-svg-icons';
-import { Mouse } from 'react-bootstrap-icons';
+import { faSearch} from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
-import HomeCard from "./Components/HomeCard";
+import HomeCard from "../Home/Components/HomeCard";
 
-export default function Home(){
+export default function SearchResult(results){
 
-
-    const [data, setData] = useState([]);
-
-    useEffect(() => {
-    axios.get('http://localhost:80/products')
-      .then(
-        (response) => { 
-            setData(response.data);
-            console.log(response.data);
-        });
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    const [data,setData] = useState([]);
+    // const urlParams = new URLSearchParams(queryString);
+  useEffect(() => {
+    // const product = urlParams.get('product')
+    // console.log(product);
+    const searchWord = urlParams.get('searchWord')
+    const min = urlParams.get('min')
+    const max = urlParams.get('max')
+    const category = urlParams.get('category')
+    const inputs = {search:searchWord,range:[min,max],category:category}
+    axios.post('http://localhost:80/search',inputs).then(function (response) {
+        setData(response.data);
+    });
   }, []);
 
     return(
@@ -33,35 +36,20 @@ export default function Home(){
             </div>
 
             <section class="home-welcome-two py-6 bg-light">
-                <div class="row">
-                    <div class="mb-3 mb-lg-0 text-center col-lg-4">
+                <div class="row justify-content-center">
+                    <div class="mb-3 mb-lg-0 text-center col-lg-4 ">
                         <div class="px-0 px-lg-3">
-                            <FontAwesomeIcon icon={faHome} size="7x"/>
-                            <h3 class="h5">Shop from home</h3>
-                            <p class="text-muted">If you don't feel like going outside. Use our site and go shopping and browse through itemss. Go ahead and fill up your cart!</p>
+                        <FontAwesomeIcon icon={faSearch} size="7x" />
+                            <h3 class="h5">Your Search Results:</h3>
                         </div>
                     </div>
-                    <div class="mb-3 mb-lg-0 text-center col-lg-4">
-                        <div class="px-0 px-lg-3">
-                            <Mouse size={115} />
-                            <h3 class="h5">One Click Away</h3>
-                            <p class="text-muted">Your items will be ordered just by one click. You can save your time. What are you waiting for!</p>
-                        </div>
-                    </div>
-                    <div class="mb-3 mb-lg-0 text-center col-lg-4">
-                        <div class="px-0 px-lg-3">
-                            <FontAwesomeIcon icon={faShieldAlt} size="7x" />
-                            <h3 class="h5">Buy with confidence</h3>
-                            <p class="text-muted">You can go shopping safely. Everything is safe and secure. Your data is encrypted</p>
-                        </div>
-                    </div>
+
                 </div>
             </section>
 
             <div className="home-products py-5">
                 <div className="container px-4 px-lg-5 mt-5">
                     <div className="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                        
                     {
                                   data.map((dataItem,index)=>{
                                     return(
@@ -76,6 +64,8 @@ export default function Home(){
                                     );
             
                                 })}
+                    
+
 
                     </div>
                 </div>

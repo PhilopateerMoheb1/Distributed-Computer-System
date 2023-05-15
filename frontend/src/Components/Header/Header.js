@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Navbar, Nav, Button, Form, Container,NavDropdown} from 'react-bootstrap';
+import { useNavigate } from "react-router-dom";
 import Slider from "@mui/material/Slider";
 import Logo from "../../Assets/svg/Color logo with background.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from 'axios';
 import './Header.css';
+import SearchResult from "../../pages/SearchResults/SearchResult"
+import { Windows } from "react-bootstrap-icons";
 import icon from "../../Assets/png/profile-dropdown.png"
 import coin from "../../Assets/25498.jpg"
 
@@ -16,6 +19,7 @@ export default function Header(){
     const [range, setRange] = React.useState([0, 1000]);
     const [inputs,setInputs] = useState({});
     const [data,setData] = useState({});
+    const navigate = useNavigate();
 
     useEffect(()=>{
         setInputs(values => ({...values,["range"]: [0, 1000]}));
@@ -56,9 +60,11 @@ export default function Header(){
     
     const handleSubmit = (event) =>{
         event.preventDefault();
-        axios.post('http://localhost:80/search',inputs).then(function (response) {
-            setData(response.data[0]);
-        });
+        let path = "/SearchResult"+"?searchWord="+inputs.search+"&min="+inputs.range[0]+"&max="+inputs.range[1]+"&category="+inputs.category
+        window.location = path
+        
+        
+        
     }
 
     function handleChanges(event,newValue) {
