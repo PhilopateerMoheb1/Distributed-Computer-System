@@ -65,15 +65,17 @@ export default class App extends React.Component {
         .then(function (response) {
         var newBalance =parseInt(response.data[0].Cash_Balance)+parseInt(formData.Tokens);
         let inputs = ["Cash_Balance",newBalance,"Name",response.data[0].Name]
-        axios.post('http://localhost:80/transaction',inputs);
+        axios.post('http://localhost:80/newtransaction',inputs);
   })
       var success = "You've Successfully Bought ";
       var msg = success.concat(formData.Tokens," Tokens!");
-      swal.fire(
-        'Done!',
-        msg,
-        'success'
-      )
+      swal.fire({
+        title: "Done!",
+        text: msg,
+        icon: 'success'
+    }).then(function() {
+        window.location = "http://localhost:3000/";
+    });
 
 
   

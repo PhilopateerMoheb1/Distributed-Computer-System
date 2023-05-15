@@ -19,14 +19,8 @@ export default function Login(){
                 console.log(response)
                 if("ID" in response.data){
                     console.log("logged in");
-                    //redirect to home here
-                    //How to access data:
-                    //check using this condition if("ID" in response.data)? logged in : not logged in
+                    window.location = "./";
                     //how to access data ? if logged in name=response.data["name"]
-                }
-                else{
-                    //this is for testing
-                    console.log("not logged in");
                 }
             }
         );
@@ -41,31 +35,11 @@ export default function Login(){
     const handleSubmit = (event) =>{
         event.preventDefault();
         axios.post('http://localhost:80/login',inputs).then(function (response) {
-            console.log(response.data);
-            if (response.data.trim()=="Wrong Password") {
-                // handle successful upload
-                
-                Swal.fire({
-                    title: 'Wrong Password',
-                    icon: 'error'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.reload();
-                    }
-                });
-            } else if(response.data.trim()=="Email doesn't exist!") {
-                Swal.fire({
-                    title: "Email doesn't exist!",
-                    icon: 'error'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.reload();
-                    }
-                });
+            if("ID" in response.data){
+                console.log("in")
+                window.location = "./";
             }
-            else{
-                //redirect to home page
-            }
+            console.log("out2")
         });
     }
    

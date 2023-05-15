@@ -111,7 +111,6 @@ function validateLogin()
         for ($i; $i < count($read); $i++) {
             if ($read[$i]['Email'] == $_POST['uemail']) {
                 if ($read[$i]['Password'] == md5($_POST['upassword'])) {
-                    echo "Success";
                     $_SESSION['logged_in'] = true;
                     $_SESSION['Name'] = $read[$i]['Name'];
                     $_SESSION['Email'] = $read[$i]['Email'];
@@ -120,7 +119,7 @@ function validateLogin()
                     $_SESSION['Cash_Balance'] = $read[$i]['Cash_Balance'];
                     $_SESSION['ID'] = $read[$i]['ID'];
                     $_SESSION['Address'] = $read[$i]['Address'];
-                    $_SESSION['Phone Number'] = $read[$i]['Phone_Number'];
+                    $_SESSION['Phone_Number'] = $read[$i]['Phone_Number'];
                     $_SESSION['DOB'] = $read[$i]['DOB'];
                     $_SESSION['Password'] = $read[$i]['Password'];
                     session_write_close();

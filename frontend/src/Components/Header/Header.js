@@ -57,7 +57,7 @@ export default function Header(){
         <div className="Header">
             <Navbar className = "Header-Navbar" variant="dark" fixed="top" expand="lg">
                 <Container fluid>
-                    <Navbar.Brand href="./"><img
+                    <Navbar.Brand href="/"><img
                         alt="Trustify"
                         src={Logo}
                         width="200 rem"
@@ -116,7 +116,7 @@ export default function Header(){
                         style={{ maxHeight: '100px',width:'20%'}}
                         navbarScroll>
                             {seller?<Nav.Link  style={{color:"white"}} className="m-auto" href="/AddListing">Add Listing</Nav.Link>:null}
-                            <Nav.Link  style={{color:"white"}} className="m-auto" href="./userInfo">Profile</Nav.Link>
+                            <Nav.Link  style={{color:"white"}} className="m-auto" href="/userInfo">Profile</Nav.Link>
                             <Nav.Link style={{color:"white"}} className="m-auto" href="/Cart">Cart</Nav.Link>
                         </Nav>
                         </Navbar.Collapse>

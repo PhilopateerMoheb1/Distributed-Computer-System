@@ -5,12 +5,20 @@ import React, { useEffect, useState } from "react";
 import axios from 'axios';
 
 export default function UserInfoPage(){
-    const [UserData,setData] = useState([]);
+    const [UserData,setUserData] = useState([]);
+    axios.defaults.withCredentials = true;
     useEffect(()=>{
-        axios.get('http://localhost:80/users')
-        .then(function (response) {
-            setData(response.data[0])
-        })
+        axios.get('http://localhost:80/session').then(
+            (response) => {
+                console.log(response)
+                if("ID" in response.data){
+                  setUserData(response.data)
+                }
+                else{
+                    window.location = "/login";
+                }
+            }
+        );
     },[]);
     return(  
         <div className="ProfileContainer">

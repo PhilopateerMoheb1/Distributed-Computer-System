@@ -1,0 +1,50 @@
+.home-welcome-one {
+    top: 0;
+    left: 0;
+    right: 0;
+}
+
+.home-welcome-two {
+    margin-top: 1rem;
+}
+
+.card-img-top {
+    height: 150px;
+    background-size: cover;
+    background-position: center;
+    background-color: #f8f9fa; 
+}
+
+.home-product-description {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+section.home-welcome-two {
+    background-color: #f8f9fa; /* Change this to the lighter color you want */
+}
+
+.home-welcome-two h3{
+    font-size: 32px;
+}
+
+.home-welcome-two p{
+    font-size: 20px;
+    font-family: 'Georgia', serif;
+    line-height: 1.5;
+
+}
+
+p.subtitle.text-secondary {
+    color: blue; /* Change this to the color you want */
+    font-family: 'Comic Sans MS'; /* Change this to the font you want */
+    font-size: 32px;
+}
+
+.home-product-card .btn{
+    margin-bottom: 0.5rem;
+}
+.HomeContainer{
+    margin-top: 80px;
+}

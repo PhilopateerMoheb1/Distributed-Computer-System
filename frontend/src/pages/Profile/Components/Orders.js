@@ -1,7 +1,29 @@
 import "../styles.css"
 import 'bootstrap/dist/css/bootstrap.css';
+import {useState, useEffect} from "react";
+import axios from 'axios';
+import OrdersCard from "./OrdersCard";
 
 export default function Orders(){
+  
+  const [data,setData] = useState([]);
+  axios.defaults.withCredentials = true;
+  useEffect(()=>{
+    axios.get('http://localhost:80/session').then(
+      (response) => {
+          if("ID" in response.data){
+            axios.post('http://localhost:80/getlistings',response.data.ID)
+            .then(function (response) {               
+                  axios.post('http://localhost:80/listings',response.data)
+                  .then(function(response) {
+                    setData(response.data)
+                  })
+            })
+          }
+      }
+
+  );
+},[]);
     return(
 <div class="ProfileContainer">
 
@@ -23,7 +45,7 @@ export default function Orders(){
             <svg class="bi pe-none me-2" width="16" height="16">
               <use href="#speedometer2"></use>
             </svg>
-            Orders
+            Your Listings
           </a>
         </li>
         <li>
@@ -43,106 +65,27 @@ export default function Orders(){
     <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-tertiary" style={{margin: "0 auto", width: "1200px"}}>
       <hr/>
       <div class="row">
+
         <div class="col col-bg-6">
           <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="row">
-                <div class="col col-lg-2">
-                  <img src={require("../images/katana1.jpg")} alt="" class="img-fluid img-thumbnail"/>
-                </div>
-                <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>4/5/2023</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small>And some small print.</small>
-                </div>
-              </div>
-            </a>
 
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="row">
-                <div class="col col-lg-2">
-                  <img src={require("../images/katana2.jpg")} alt="" class="img-fluid img-thumbnail"/>
-                </div>
-                <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>4/5/2023</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small>And some small print.</small>
-                </div>
-              </div>
-            </a>
+            {
+                        data.map((dataItem,index)=>{
+                        
+                          return(
+                              <OrdersCard name = {dataItem.Product_Name}
+                              category = {dataItem.Category}
+                              description = {dataItem.Product_Description}
+                              img = {dataItem.Product_Picture}
+                              quantity = {dataItem.Quantity_Available}
+                              />
+                          );
+  
+                      })}
+            
 
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="row">
-                <div class="col col-lg-2">
-                  <img src={require("../images/katana3.jpg")} alt="" class="img-fluid img-thumbnail"/>
-                </div>
-                <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>4/5/2023</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small>And some small print.</small>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <div class="col col-bg-6">
-          <div class="list-group">
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="row">
-                <div class="col col-lg-2">
-                  <img src={require("../images/katana1.jpg")} alt="" class="img-fluid"/>
-                </div>
-                <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>4/5/2023</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small>And some small print.</small>
-                </div>
-              </div>
-            </a>
 
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="row">
-                <div class="col col-lg-2">
-                  <img src={require("../images/katana2.jpg")} alt="" class="img-fluid"/>
-                </div>
-                <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>4/5/2023</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small>And some small print.</small>
-                </div>
-              </div>
-            </a>
 
-            <a href="#" class="list-group-item list-group-item-action">
-              <div class="row">
-                <div class="col col-lg-2">
-                  <img src={require("../images/katana3.jpg")} alt="" class="img-fluid"/>
-                </div>
-                <div class="col">
-                  <div class="d-flex w-100 justify-content-between">
-                    <h5 class="mb-1">List group item heading</h5>
-                    <small>4/5/2023</small>
-                  </div>
-                  <p class="mb-1">Some placeholder content in a paragraph.</p>
-                  <small>And some small print.</small>
-                </div>
-              </div>
-            </a>
           </div>
         </div>
       </div>

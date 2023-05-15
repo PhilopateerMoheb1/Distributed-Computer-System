@@ -8,6 +8,19 @@ import swal from 'sweetalert2'
 export default function AddListing(){
 
     const [inputs,setInputs] = useState({});
+    axios.defaults.withCredentials = true;
+    useEffect(()=>{
+        axios.get('http://localhost:80/session').then(
+            (response) => {
+                console.log(response)
+                if("ID" in response.data){
+                }
+                else{
+                    window.location = "/login";
+                }
+            }
+        );
+    },[]);
 
     const handleSelect = (event) => {
         const name = event.target.name;
@@ -28,6 +41,7 @@ export default function AddListing(){
 
     const handleSubmit = (event) =>{
         event.preventDefault();
+        console.log(inputs)
         axios.post('http://localhost:80/upload',inputs).then(function (response) {
             console.log(response.data[0]);
         });

@@ -3,26 +3,59 @@ import swal from 'sweetalert2'
 import React, { useEffect, useState,useRef} from "react";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-let usermoney = 100;
 
 
 function Product(props){
+  const [Userdata,setUserData] = useState({});
+  const [data,setProductData] = useState([]);
+  var pathname = window.location.pathname
+  pathname = pathname.substring(pathname.lastIndexOf("/"))
+  const URL = "http://localhost:80/products" + pathname
+  useEffect(()=>{
+    axios.get('http://localhost:80/session').then(
+        (response) => {
+            console.log(response)
+            if("ID" in response.data){
+              setUserData(response.data)
+            }
+        }
+    );
+    axios.get(URL)
+    .then(function (response) {
+      setProductData(response.data[0]);
+    })
 
+},[]);
+
+
+
+
+  axios.defaults.withCredentials = true;
   const handleClick = () => {
-
-    axios.get('http://localhost:80/users')
-        .then(function (response) {
-            let balance = response.data[0].Cash_Balance
-            if(balance>=Productdata.Product_Price){
-                let inputs = ["Cash_Balance",response.data[0].Cash_Balance-Productdata.Product_Price,"Name",response.data[0].Name]
-                axios.post('http://localhost:80/transaction',inputs);
-            
+            if("ID" in Userdata){
+            let balance = Userdata.Cash_Balance
+            if(data.Quantity_Available <=0){
               swal.fire(
-                'Done!',
-                'Your Transaction Was Successful!',
-                'success'
+                'Error!',
+                'Sorry,Product is Out of Stock!',
+                'error'
               )
-              
+            }
+            else if(balance>=data.Product_Price){
+                let inputs = ["Cash_Balance",Userdata.Cash_Balance-data.Product_Price,"Name",Userdata.Name]
+                axios.post('http://localhost:80/newtransaction',inputs);
+                inputs = ["Quantity_Available",data.Quantity_Available-1,"Product_Name",data.Product_Name]
+                axios.post('http://localhost:80/newtransaction',inputs);
+                let TransactionInputs = {PID:data.PID, BID:Userdata.ID, SID:data.SID, Transaction_Date:new Date()};
+                axios.post('http://localhost:80/transaction',TransactionInputs);
+
+              swal.fire({
+                title: "Done!",
+                text: 'Your Transaction Was Successful!',
+                icon: 'success'
+            }).then(function() {
+                window.location = "/";
+            });
             }
             else{
               swal.fire({
@@ -30,19 +63,16 @@ function Product(props){
                 text: 'insufficient Funds In Wallet',
                 icon: 'error'
             }).then(function() {
-                window.location = "CreditCard";
+                window.location = "/CreditCard";
             });
             }
-        })
+          }
+          else{
+            window.location = "/login";
+          }
+
   }
-  const [Productdata,setData] = useState([]);
-  useEffect(()=>{
-      axios.get('http://localhost:80/products')
-      .then(function (response) {
-          setData(response.data[0])
-          console.log(response.data[0])
-      })
-  },[]);
+
 
     return(
       <div class ="productBody">
@@ -56,6 +86,8 @@ function Product(props){
                         <h1 class="display-5 fw-bolder">{props.name}</h1>
                         <div class="fs-5 mb-5">
                             <span>{props.Product_Price} L.E.</span>
+                            
+                            {data.Quantity_Available >0? <p>Quantity Available: {data.Quantity_Available}</p>:<p style={{"color":"red"}}>Out of Stock!</p>}
                         </div>
                         <p class="lead">{props.description}</p>
                         <div class="d-flex">

@@ -6,11 +6,13 @@ import axios from 'axios';
 
 export default function ProductPage(){
     const [Productdata,setData] = useState([]);
+    var pathname = window.location.pathname
+    pathname = pathname.substring(pathname.lastIndexOf("/"))
+    const URL = "http://localhost:80/products" + pathname
     useEffect(()=>{
-        axios.get('http://localhost:80/products')
+        axios.get(URL)
         .then(function (response) {
-            setData(response.data[0])
-            console.log(response.data[0])
+            setData(response.data[0]);
         })
     },[]);
     return(

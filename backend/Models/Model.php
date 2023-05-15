@@ -31,6 +31,25 @@ class Model
 		$stmt->execute($arr);
 		return $stmt->fetchAll();
 	}
+	public function getByInTransaction($col,$In)
+	{
+		$sql = "SELECT * FROM " . $this->name.",transaction" . " WHERE " . "product.PID" . " IN". $In." AND transaction.PID = product.PID;";
+		$stmt = $this->pdo->prepare($sql);
+		$arr = [];
+		array_push($arr, $In);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+	public function getByIn($col,$In)
+	{
+		$sql = "SELECT * FROM " . $this->name.",transaction" . " WHERE " . "product.PID" . " IN". $In." AND transaction.PID = product.PID;";
+		$stmt = $this->pdo->prepare($sql);
+		$arr = [];
+		array_push($arr, $In);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
+
 
 	public function getLike($regex, $category, $min, $max)
 	{

@@ -1,12 +1,35 @@
 import "../styles.css"
 import 'bootstrap/dist/css/bootstrap.css';
+import {useState, useEffect} from "react";
+import axios from 'axios';
+import TransactionCard from "./TransactionCard"
 
 export default function Transactions(){
+  const [data,setData] = useState([]);
+  axios.defaults.withCredentials = true;
+  useEffect(()=>{
+    axios.get('http://localhost:80/session').then(
+      (response) => {
+          if("ID" in response.data){
+            axios.post('http://localhost:80/gettransaction',response.data.ID)
+            .then(function (response) {               
+                  axios.post('http://localhost:80/product',response.data)
+                  .then(function(response) {
+                    setData(response.data)
+                  })
+          
+            })
+          }
+      }
+
+  );
+},[]);
+
+
+
     return(
 
 <div>
-
-
 
 
   <main class="d-flex flex-nowrap">
@@ -26,7 +49,7 @@ export default function Transactions(){
             <svg class="bi pe-none me-2" width="16" height="16">
               <use href="#speedometer2"></use>
             </svg>
-            Orders
+            Your Listings
           </a>
         </li>
         <li class="nav-item">
@@ -53,38 +76,21 @@ export default function Transactions(){
             <div class="col col-bg-1"><h5>Transaction Date</h5></div>
           </div>
 
-          <hr/> 
 
-          <div class="row">
-            <div class="col col-bg-2">
-              <img src={require("../images/katana1.jpg")} alt="" class="img-fluid img-thumbnail" style={{width: "50px"}}/>
-            </div>
-            <div class="col col-bg-6">Item Name</div>
-            <div class="col col-bg-2">Price</div>
-            <div class="col col-bg-2">4/5/2023</div>
-          </div>
+          {
+           
+          data.map((dataItem,index)=>{
+                        
+                        return(
+                            <TransactionCard name = {dataItem.Product_Name}
+                            price = {dataItem.Product_Price}
+                            date = {dataItem.Transaction_Date}
+                            image = {dataItem.Product_Picture}
+                            />
+                        );
 
-          <hr/>
+                    })}
 
-          <div class="row">
-            <div class="col col-bg-2">
-              <img src={require("../images/katana2.jpg")} alt="" class="img-fluid img-thumbnail" style={{width: "50px"}}/>
-            </div>
-            <div class="col col-bg-6">Item Name</div>
-            <div class="col col-bg-2">Price</div>
-            <div class="col col-bg-2">4/5/2023</div>
-          </div>
-
-          <hr/>
-
-          <div class="row">
-            <div class="col col-bg-2">
-              <img src={require("../images/katana3.jpg")} alt="" class="img-fluid img-thumbnail" style={{width: "50px"}}/>
-            </div>
-            <div class="col col-bg-6">Item Name</div>
-            <div class="col col-bg-2">Price</div>
-            <div class="col col-bg-2">4/5/2023</div>
-          </div>
         </li>
       </ol>
 
