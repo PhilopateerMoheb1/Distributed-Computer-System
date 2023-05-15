@@ -1,0 +1,37 @@
+.mycart-maincontainer{
+    margin: 100px 20%;
+    background-color: #393E46;
+}
+
+.mycart-header{
+    background-color: #A6E3E9;
+    padding: 15px 0;
+}
+
+.mycart-contshopping-div{
+    text-align: right;
+}
+
+.mycart-contshopping-btn{
+    margin-left: auto;
+    width: 80%;
+}
+
+.mycart-body{
+    background-color: #EEEEEE;
+    padding: 10px;
+}
+
+.mycart-img-col{
+    width: 120px;
+}
+ 
+.mycart-footer{
+    background-color: #A6E3E9;
+    padding: 15px 0;
+}
+
+.mycart-checkout-btn{
+    margin-left: auto;
+    width: 80%;
+}

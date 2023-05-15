@@ -12,7 +12,7 @@ export default function Home(){
 
     const [data, setData] = useState([]);
 
-  useEffect(() => {
+    useEffect(() => {
     axios.get('http://localhost:80/products')
       .then(
         (response) => { 
