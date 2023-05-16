@@ -10,9 +10,10 @@ export default function Transactions(){
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
       (response) => {
+        console.log(response);
           if("ID" in response.data){
             axios.post('http://localhost:80/gettransaction',response.data.ID)
-            .then(function (response) {               
+            .then(function (response) {   
                   axios.post('http://localhost:80/product',response.data)
                   .then(function(response) {
                     setData(response.data)

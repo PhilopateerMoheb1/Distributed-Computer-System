@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 }
 // csrf code add here (see below...)
 $http_origin = $_SERVER['HTTP_ORIGIN'];
-if ($http_origin == "http://dev.local:3000" || $http_origin == "http://localhost:3000" ||$http_origin == "http://localhost:3000/login" ) {
+if ($http_origin == "http://dev.local:3000" || $http_origin == "http://localhost:3000" || $http_origin == "http://localhost:3000/login") {
     header("Access-Control-Allow-Origin: $http_origin");
 }
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -60,16 +60,15 @@ $router->post("/newtransaction", function () {
     // echo json_encode($usermodel->getAll());
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
-    if($_POST[0]=="Cash_Balance"){
+    if ($_POST[0] == "Cash_Balance") {
         $usermodel->Update($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
-        if(isset($_SESSION["Cash_Balance"])){
-            $_SESSION["Cash_Balance"]=$_POST[1];
+        if (isset($_SESSION["Cash_Balance"])) {
+            $_SESSION["Cash_Balance"] = $_POST[1];
         }
-    }
-    else{
+    } else {
         $productmodel->Update($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
     }
-    
+
 });
 $router->post("/transaction", function () {
     $transactionmodel = new transaction();
@@ -82,13 +81,13 @@ $router->post("/gettransaction", function () {
     $transactionmodel = new transaction();
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
-    echo json_encode($transactionmodel->getBY("BID",$_POST));
+    echo json_encode($transactionmodel->getBY("BID", $_POST));
 });
 $router->post("/getlistings", function () {
     $productmodel = new products();
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
-    echo json_encode($productmodel->getBY("SID",$_POST));
+    echo json_encode($productmodel->getBY("SID", $_POST));
 });
 $router->get("/products", function () {
     $productmodel = new products();
@@ -99,12 +98,12 @@ $router->post("/product", function () {
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
     $query = "(";
-    foreach ($_POST as  &$value) {
+    foreach ($_POST as &$value) {
         $query = $query . $value["PID"] . ",";
     }
     $query = substr($query, 0, -1);
     $query = $query . ")";
-    print_r(json_encode($productmodel->getByInTransaction("PID",$query)));
+    print_r(json_encode($productmodel->getByInTransaction("PID", $query)));
 });
 
 
