@@ -2,7 +2,6 @@
 
 export default function OrdersCard(props){
     return(
-
         <div>
                         <a href="#" class="list-group-item list-group-item-action">
               <div class="row">

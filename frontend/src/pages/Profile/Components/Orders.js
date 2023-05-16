@@ -7,13 +7,17 @@ import OrdersCard from "./OrdersCard";
 export default function Orders(){
   
   const [data,setData] = useState([]);
+  const [empty,setEmpty] = useState(false);
   axios.defaults.withCredentials = true;
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
       (response) => {
           if("ID" in response.data){
             axios.post('http://localhost:80/getlistings',response.data.ID)
-            .then(function (response) {               
+            .then(function (response) {  
+              if(response.data.length === 0){
+                setEmpty(true)
+              }           
                     setData(response.data)
             })
           }
@@ -66,7 +70,7 @@ export default function Orders(){
         <div class="col col-bg-6">
           <div class="list-group">
 
-            {
+            { empty? <p class = "Empty">You haven't Made any Listings!</p>:
                         data.map((dataItem,index)=>{
                         
                           return(

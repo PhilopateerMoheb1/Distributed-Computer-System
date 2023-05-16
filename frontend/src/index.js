@@ -18,7 +18,7 @@ import RootLayout from './pages/Routes/RootLayout';
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import SearchResult from './pages/SearchResults/SearchResult';
-
+import Cart from "./pages/UserCart/CartPage"
 
 
 const router = createBrowserRouter(
@@ -33,6 +33,7 @@ const router = createBrowserRouter(
       <Route path="/login"  element = {<Login/>}/>
       <Route path="/Register"  element = {<Register/>}/>
       <Route path="/SearchResult"  element = {<SearchResult/>}/>
+      <Route path="/Cart"  element = {<Cart/>}/>
       <Route path="/Products/:id"  element = {<Product/>}/>
     </Route>
   )

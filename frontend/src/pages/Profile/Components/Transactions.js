@@ -6,18 +6,23 @@ import TransactionCard from "./TransactionCard"
 
 export default function Transactions(){
   const [data,setData] = useState([]);
+  const [empty,setEmpty] = useState(false);
   axios.defaults.withCredentials = true;
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
       (response) => {
-        console.log(response);
           if("ID" in response.data){
             axios.post('http://localhost:80/gettransaction',response.data.ID)
-            .then(function (response) {   
+            .then(function (response) {
+                  if(response.data.length === 0){
+                    setEmpty(true)
+                  }
+                  else{
                   axios.post('http://localhost:80/product',response.data)
                   .then(function(response) {
                     setData(response.data)
                   })
+                }
           
             })
           }
@@ -77,11 +82,7 @@ export default function Transactions(){
             <div class="col col-bg-1"><h5>Transaction Date</h5></div>
           </div>
 
-
-          {
-           
-          data.map((dataItem,index)=>{
-                        
+          {empty? <p class="justify-content-center" style={{marginLeft: '33%'}}>You Haven't Made Any Transactions!</p>:data.map((dataItem,index)=>{
                         return(
                             <TransactionCard name = {dataItem.Product_Name}
                             price = {dataItem.Product_Price}
