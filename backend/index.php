@@ -6,7 +6,7 @@ if (!isset($_SESSION)) {
 }
 // csrf code add here (see below...)
 $http_origin = $_SERVER['HTTP_ORIGIN'];
-if ($http_origin == "http://dev.local:3000" || $http_origin == "http://localhost:3000" || $http_origin == "http://localhost:3000/login") {
+if ($http_origin == "http://dev.local:3000" || $http_origin == "http://localhost:3000" || $http_origin == "http://localhost:3000/login" || $http_origin == "http://lumia.com" || $http_origin == "http://moon.com") {
     header("Access-Control-Allow-Origin: $http_origin");
 }
 header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
@@ -22,7 +22,9 @@ require_once("Models/slots.php");
 require_once("Validator.php");
 require_once("Models/users.php");
 require_once("Models/products.php");
-require_once("Models/event.php");
+require_once("Models/sellers.php");
+require_once("Models/buyers.php");
+require_once("Models/sellersbasic.php");
 require_once("Models/transaction.php");
 
 
@@ -50,7 +52,10 @@ $router->get("/products/{productID}", function ($args) {
     echo json_encode($productmodel->getBy("PID", str_replace("%20", " ", $args["productID"])));
 });
 
-
+$router->get("/getproducts", function ($args) {
+    $productmodel = new products();
+    echo json_encode($productmodel->getAlldb3());
+});
 
 
 
@@ -61,9 +66,12 @@ $router->post("/newtransaction", function () {
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
     if ($_POST[0] == "Cash_Balance") {
-        $usermodel->Update($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
+        if ($_SESSION['Role'] == "Seller") {
+            $usermodel->Updatedb1($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
+        } else {
+            $usermodel->Updatedb2($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
+        }
         if (isset($_SESSION["Cash_Balance"])) {
-            echo $_POST[1] . "\n\n\ncoco\n\n\n\n";
             $_SESSION["Cash_Balance"] = $_POST[1];
         }
     } else {
@@ -76,7 +84,8 @@ $router->post("/transaction", function () {
     // echo json_encode($usermodel->getAll());
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
-    $transactionmodel->insert($_POST);
+    print_r($_POST);
+    $transactionmodel->insertdb3($_POST);
 });
 $router->post("/gettransaction", function () {
     $transactionmodel = new transaction();
@@ -92,7 +101,7 @@ $router->post("/getlistings", function () {
 });
 $router->get("/products", function () {
     $productmodel = new products();
-    echo json_encode($productmodel->getAll());
+    echo json_encode($productmodel->getAlldb3());
 });
 $router->post("/product", function () {
     $productmodel = new products();
@@ -165,7 +174,7 @@ $router->post("/upload", function () {
     foreach ($_POST as $field) {
         //echo $field;
     }
-    $productmodel->insert($_POST);
+    $productmodel->insertdb3($_POST);
 });
 
 $router->route();

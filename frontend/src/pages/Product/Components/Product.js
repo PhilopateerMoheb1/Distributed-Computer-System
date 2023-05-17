@@ -28,7 +28,26 @@ function Product(props){
 },[]);
 
 
+function padTo2Digits(num) {
+  return num.toString().padStart(2, '0');
+}
 
+
+function formatDate(date) {
+  return (
+    [
+      date.getFullYear(),
+      padTo2Digits(date.getMonth() + 1),
+      padTo2Digits(date.getDate()),
+    ].join('-') +
+    ' ' +
+    [
+      padTo2Digits(date.getHours()),
+      padTo2Digits(date.getMinutes()),
+      padTo2Digits(date.getSeconds()),
+    ].join(':')
+  );
+}
 
   axios.defaults.withCredentials = true;
   const handleClick = () => {
@@ -46,7 +65,7 @@ function Product(props){
                 axios.post('http://localhost:80/newtransaction',inputs);
                 inputs = ["Quantity_Available",data.Quantity_Available-1,"Product_Name",data.Product_Name]
                 axios.post('http://localhost:80/newtransaction',inputs);
-                let TransactionInputs = {PID:data.PID, BID:Userdata.ID, SID:data.SID, Transaction_Date:new Date()};
+                let TransactionInputs = {PID:data.PID, BID:Userdata.ID, SID:data.SID, Transaction_Date:formatDate(new Date())};
                 axios.post('http://localhost:80/transaction',TransactionInputs);
 
               swal.fire({

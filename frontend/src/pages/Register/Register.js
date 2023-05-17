@@ -102,7 +102,7 @@ export default function Register(){
                                 <div className="mb-3">
                                     <label for="reg_email" className="form-label register_label">Email address</label>
                                     <input onChange={handleChange} type="email" className="form-control" id="reg_Email" aria-describedby="emailHelp"
-                                    name="Email" placeholder="Email address" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" title="invalid email" />
+                                    name="Email" placeholder="Email address" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="invalid email" />
                                                 
 
                                 </div>

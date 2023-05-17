@@ -7,25 +7,39 @@ class Model
 	private $name;
 	// filled from parent class and includes the table columns of the model
 	private $fields;
-	private $pdo;
+	private $pdo1;
+	private $pdo2;
+	private $pdo3;
 	public function __construct($name, $fields)
 	{
-		$this->pdo = Connection::getConnection();
+		$this->pdo1 = Connection::getConnection()[0];
+		$this->pdo2 = Connection::getConnection()[1];
+		$this->pdo3 = Connection::getConnection()[2];
 		$this->name = $name;
 		$this->fields = $fields;
 	}
 
 	// lists all entries in table
-	public function getAll()
+	public function getAlldb1()
 	{
-		$stmt = $this->pdo->query("SELECT * FROM " . $this->name . ";");
+		$stmt = $this->pdo1->query("SELECT * FROM " . $this->name . ";");
+		return $stmt->fetchAll();
+	}
+	public function getAlldb2()
+	{
+		$stmt = $this->pdo2->query("SELECT * FROM " . $this->name . ";");
+		return $stmt->fetchAll();
+	}
+	public function getAlldb3()
+	{
+		$stmt = $this->pdo3->query("SELECT * FROM " . $this->name . ";");
 		return $stmt->fetchAll();
 	}
 
 	public function getBy($col, $val)
 	{
 		$sql = "SELECT * FROM " . $this->name . " WHERE " . $col . "=?;";
-		$stmt = $this->pdo->prepare($sql);
+		$stmt = $this->pdo3->prepare($sql);
 		$arr = [];
 		array_push($arr, $val);
 		$stmt->execute($arr);
@@ -34,7 +48,7 @@ class Model
 	public function getByInTransaction($col,$In)
 	{
 		$sql = "SELECT * FROM " . $this->name.",transaction" . " WHERE " . "product.PID" . " IN". $In." AND transaction.PID = product.PID;";
-		$stmt = $this->pdo->prepare($sql);
+		$stmt = $this->pdo3->prepare($sql);
 		$arr = [];
 		array_push($arr, $In);
 		$stmt->execute();
@@ -43,7 +57,7 @@ class Model
 	public function getByIn($col,$In)
 	{
 		$sql = "SELECT * FROM " . $this->name.",transaction" . " WHERE " . "product.PID" . " IN". $In." AND transaction.PID = product.PID;";
-		$stmt = $this->pdo->prepare($sql);
+		$stmt = $this->pdo3->prepare($sql);
 		$arr = [];
 		array_push($arr, $In);
 		$stmt->execute();
@@ -56,12 +70,12 @@ class Model
 		$arr = [];
 		if($category === "all"){
 			$sql = "SELECT * FROM " . $this->name . " WHERE (Product_Price BETWEEN " . $min . " AND " . $max . ") AND Product_Name LIKE ?;";
-			$stmt = $this->pdo->prepare($sql);		
+			$stmt = $this->pdo3->prepare($sql);		
 			array_push($arr, $regex);
 		}
 		else{
 			$sql = "SELECT * FROM " . $this->name . " WHERE  Category =? AND (Product_Price BETWEEN " . $min . " AND " . $max . ") AND Product_Name LIKE ?;";
-			$stmt = $this->pdo->prepare($sql);
+			$stmt = $this->pdo3->prepare($sql);
 			array_push($arr, $category);
 			array_push($arr, $regex);
 		}
@@ -70,7 +84,26 @@ class Model
 	}
 
 	// inserts an item into table 
-	public function insert($newRow)
+	public function insertdb1($newRow)
+	{
+		// prepare the query
+		$query = "INSERT INTO " . $this->name . " (";
+		foreach ($this->fields as $field) {
+			$query = $query . $field . ",";
+		}
+		$query = rtrim($query, ",");
+		$query = $query . ") VALUES (";
+		foreach ($this->fields as $field) {
+			$query = $query . ":" . $field . ",";
+		}
+		$query = rtrim($query, ",");
+		$query = $query . ");";
+		$query = $query . "DELETE FROM DB1.user;";
+		// run the query
+		$stmt = $this->pdo1->prepare($query);
+		$stmt->execute($newRow);
+	}
+	public function insertdb2($newRow)
 	{
 		// prepare the query
 		$query = "INSERT INTO " . $this->name . " (";
@@ -85,14 +118,46 @@ class Model
 		$query = rtrim($query, ",");
 		$query = $query . ");";
 		// run the query
-		$stmt = $this->pdo->prepare($query);
+		$stmt = $this->pdo2->prepare($query);
+		$stmt->execute($newRow);
+	}
+	public function insertdb3($newRow)
+	{
+		// prepare the query
+		$query = "INSERT INTO " . $this->name . " (";
+		foreach ($this->fields as $field) {
+			$query = $query . $field . ",";
+		}
+		$query = rtrim($query, ",");
+		$query = $query . ") VALUES (";
+		foreach ($this->fields as $field) {
+			$query = $query . ":" . $field . ",";
+		}
+		$query = rtrim($query, ",");
+		$query = $query . ");";
+		// run the query
+		$stmt = $this->pdo3->prepare($query);
 		$stmt->execute($newRow);
 	}
 	public function Update($updated, $update, $where, $wherevalue)
 	{
 		$sql = "UPDATE " . $this->name . " SET " . $updated . "=? WHERE " . $where . "=" . "'" . $wherevalue . "'";
 		echo $sql;
-		$stmt = $this->pdo->prepare($sql);
+		$stmt = $this->pdo3->prepare($sql);
+		$stmt->execute([$update]);
+	}
+	public function Updatedb1($updated, $update, $where, $wherevalue)
+	{
+		$sql = "UPDATE " . $this->name . " SET " . $updated . "=? WHERE " . $where . "=" . "'" . $wherevalue . "'";
+		echo $sql;
+		$stmt = $this->pdo1->prepare($sql);
+		$stmt->execute([$update]);
+	}
+	public function Updatedb2($updated, $update, $where, $wherevalue)
+	{
+		$sql = "UPDATE " . $this->name . " SET " . $updated . "=? WHERE " . $where . "=" . "'" . $wherevalue . "'";
+		echo $sql;
+		$stmt = $this->pdo2->prepare($sql);
 		$stmt->execute([$update]);
 	}
 }
