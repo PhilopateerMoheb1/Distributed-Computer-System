@@ -98,8 +98,8 @@ export default function Header(){
                                 <option value="fashion">Fashion</option>
                                 <option value="arts">Arts</option>
                                 <option value="automotive">Automotive</option>
-                                <option value="baby">Baby</option>
-                                <option value="beauty">Beauty</option>
+                                <option value="baby">Baby Supplies</option>
+                                <option value="beauty">Beauty Items</option>
                                 <option value="books">Books</option>
                                 <option value="electronics">Electronics</option>
                                 <option value="grocery">Grocery</option>

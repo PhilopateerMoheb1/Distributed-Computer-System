@@ -1,6 +1,24 @@
+import React, { useEffect, useState } from "react";
 import "../styles.css"
 import 'bootstrap/dist/css/bootstrap.css';
+import axios from "axios";
 export default function UserInfo(props){
+
+  const [showYourListings,setShowYourListings] = useState(false);
+
+  useEffect(()=>{
+    axios.get('http://localhost:80/session').then(
+        (response) => {
+            var objectConstructor = ({}).constructor;
+            if(response.data.constructor === objectConstructor){
+                if("ID" in response.data && response.data.Role === "Seller"){
+                    setShowYourListings(true);
+                }
+            }
+        }
+    );
+  },[]);
+
     return(
       
       
@@ -16,14 +34,14 @@ export default function UserInfo(props){
                 User Info
               </a>
             </li>
-            <li>
+            {showYourListings ? <li>
               <a href="./orders" className="nav-link text-white">
                 <svg className="bi pe-none me-2" width="16" height="16">
                   <use href="#speedometer2"></use>
                 </svg>
                 Your Listings
               </a>
-            </li>
+            </li>:null }
             <li>
               <a href="./transactions" className="nav-link text-white">
                 <svg className="bi pe-none me-2" width="16" height="16">

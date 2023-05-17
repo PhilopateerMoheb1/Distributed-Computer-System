@@ -61,10 +61,10 @@ export default class App extends React.Component {
         acc[d.name] = d.value;
         return acc;
       }, {});
-        axios.get('http://localhost:80/users')
+        axios.get('http://localhost:80/session')
         .then(function (response) {
-        var newBalance =parseInt(response.data[0].Cash_Balance)+parseInt(formData.Tokens);
-        let inputs = ["Cash_Balance",newBalance,"Name",response.data[0].Name]
+        var newBalance =parseInt(response.data.Cash_Balance)+parseInt(formData.Tokens);
+        let inputs = ["Cash_Balance",newBalance,"ID",response.data.ID]
         axios.post('http://localhost:80/newtransaction',inputs);
   })
       var success = "You've Successfully Bought ";
@@ -119,6 +119,8 @@ export default class App extends React.Component {
                 name="name"
                 className="form-control"
                 placeholder="Name"
+                pattern="[A-Za-z\s]+"
+                title="Name can have charachters and spaces only"
                 required
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}

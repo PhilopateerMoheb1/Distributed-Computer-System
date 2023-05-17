@@ -63,6 +63,7 @@ $router->post("/newtransaction", function () {
     if ($_POST[0] == "Cash_Balance") {
         $usermodel->Update($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
         if (isset($_SESSION["Cash_Balance"])) {
+            echo $_POST[1] . "\n\n\ncoco\n\n\n\n";
             $_SESSION["Cash_Balance"] = $_POST[1];
         }
     } else {

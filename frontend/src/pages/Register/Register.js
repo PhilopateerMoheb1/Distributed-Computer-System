@@ -95,7 +95,7 @@ export default function Register(){
                                 <div className="mb-3">
                                     <label for="reg_name" className="form-label register_label">Full Name</label>
                                     <input onChange={handleChange} type="text" className="form-control" id="reg_Name" name="Name"
-                                    placeholder="full name" required pattern="[A-Za-z\s]+" title="Name can have charachters and spaces only"/>
+                                    placeholder="full name" required pattern="[A-Za-z][A-Za-z\s]*[A-Za-z]$" title="Name can have charachters and spaces only"/>
                                     
                                 </div>
 
@@ -110,7 +110,7 @@ export default function Register(){
                                 <div className="mb-3">
                                     <label for="street-address" className="form-label register_label">Street address</label>
                                     <input onChange={handleChange} type="text" className="form-control" id="street-address" name="Address"
-                                    autocomplete="street-address" placeholder="street address" required/>                        
+                                    autocomplete="street-address" pattern="\S(.*\S)?" title="This field is required" placeholder="street address" required/>                        
                                 </div>
 
                                 <div className="mb-3">
@@ -123,7 +123,7 @@ export default function Register(){
                                 <div className="mb-3">
                                     <label for="reg_birthday" className="form-label register_label" >Birthday:</label>
                                     <input onChange={handleChange} type="date" className="form-control" id="reg_birthday" name="DOB" required
-                                    min="1900-01-01" max="2005-12-31"/>   
+                                    min="1905-01-01" max="2005-12-31"/>   
                             </div>
                             </div>   
                                 <div className="col-md-6">
@@ -135,6 +135,7 @@ export default function Register(){
                                         <option value ="" selected disabled hidden>Choose...</option>
                                         <option value="Male">Male</option>
                                         <option value="Female">Female</option>
+                                        <option value="none">Would rather not say</option>
                                         
                                     </select>
                                 </div>

@@ -12,6 +12,9 @@ export default function Orders(){
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
       (response) => {
+          if("ID" in response.data && response.data.Role === "User"){
+            window.location = "./transactions";
+          }
           if("ID" in response.data){
             axios.post('http://localhost:80/getlistings',response.data.ID)
             .then(function (response) {  

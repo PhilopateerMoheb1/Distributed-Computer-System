@@ -2,8 +2,25 @@ import React, { useEffect, useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./Footer.css"
 import 'font-awesome/css/font-awesome.min.css';
+import axios from "axios";
 
 function Footer() {
+
+    const [showLogin,setShowLogin] = useState(true);
+
+    useEffect(()=>{
+        axios.get('http://localhost:80/session').then(
+            (response) => {
+                var objectConstructor = ({}).constructor;
+                if(response.data.constructor === objectConstructor){
+                    if("ID" in response.data){
+                        console.log("logged in");
+                        setShowLogin(false);
+                    }
+                }
+            }
+        );
+    },[]);
 
     return (
         <div>
@@ -20,8 +37,8 @@ function Footer() {
                                 <li><a href="/">Home</a></li>
                                 <li><a href="/userinfo">Profile</a></li>
                                 <li><a href="/events">Cart</a></li>
-                                <li><a href="/login">Login</a></li>
-                                <li><a href="/register">Register</a></li>
+                                {showLogin?<li><a href="/login">Login</a></li>:null}
+                                {showLogin?<li><a href="/register">Register</a></li>:null}
                             </ul>
                         </div>
                     </div>

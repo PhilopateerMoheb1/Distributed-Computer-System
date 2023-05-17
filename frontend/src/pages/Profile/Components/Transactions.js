@@ -7,10 +7,14 @@ import TransactionCard from "./TransactionCard"
 export default function Transactions(){
   const [data,setData] = useState([]);
   const [empty,setEmpty] = useState(false);
+  const [showYourListings,setShowYourListings] = useState(false);
   axios.defaults.withCredentials = true;
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
       (response) => {
+        if("ID" in response.data && response.data.Role === "Seller"){
+          setShowYourListings(true);
+        }
           if("ID" in response.data){
             axios.post('http://localhost:80/gettransaction',response.data.ID)
             .then(function (response) {
@@ -50,14 +54,14 @@ export default function Transactions(){
             User Info
           </a>
         </li>
-        <li>
+        {showYourListings ? <li>
           <a href="./orders" class="nav-link text-white">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use href="#speedometer2"></use>
             </svg>
             Your Listings
           </a>
-        </li>
+        </li>:null}
         <li class="nav-item">
           <a href="./transactions" class="nav-link active" aria-current="page">
             <svg class="bi pe-none me-2" width="16" height="16">

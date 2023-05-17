@@ -2,6 +2,9 @@ import "./Login.css"
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
+
 
 
 export default function Login(){
@@ -32,6 +35,15 @@ export default function Login(){
         const value = event.target.value;       
         setInputs(values => ({...values,[name]: value}));
     }
+
+    const [passwordShown, setPasswordShown] = useState(false);
+
+    // Password toggle handler
+    const togglePassword = () => {
+        // When the handler is invoked
+        // inverse the boolean state of passwordShown
+        setPasswordShown(!passwordShown);
+    };
 
     const handleSubmit = (event) =>{
         event.preventDefault();
@@ -66,17 +78,16 @@ export default function Login(){
                         </div>
                         <div className="mb-3">
                             <label for="exampleInputPassword1" className="form-label login_label">Password</label>
-                            <input onChange={handleChange} type="password" name="upassword" className="form-control" id="exampleInputPassword1"  required/>
+                            <input onChange={handleChange} type={passwordShown ? "text" : "password"} name="upassword" className="form-control" id="exampleInputPassword1"  required/>
                         </div>
-
+                        
                         <div className="mb-3 justify-content-center login-form-actions">
                             <button type="submit" className="btn btn-outline-primary login_form_btn">Login</button>
-                            <br/>
-                            <br/>
-                                        new user? Register
-                            <br/>
+                        </div>
+                            <label for="register" className="form-label login_label">new user?</label>
+                        <div className="mb-3 justify-content-center login-form-actions">
                             <a href="/Register">
-                            <button type="button" className="btn btn-outline-primary login_form_btn">Register</button>
+                            <button id="register" type="button" className="btn btn-outline-primary login_form_btn">Register</button>
                             </a>
                         </div>
                     </form>

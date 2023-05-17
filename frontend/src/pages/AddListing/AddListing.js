@@ -14,7 +14,7 @@ export default function AddListing(){
         axios.get('http://localhost:80/session').then(
             (response) => {
                 console.log(response)
-                if("ID" in response.data){
+                if("ID" in response.data && response.data.Role === "Seller"){
                     setID(response.data.ID)
                 }
                 else{
@@ -69,7 +69,7 @@ export default function AddListing(){
                 <input onChange={handleChange} type="text" id="name" name="Product_Name" required/>
                 
                 <label for="price">Price:</label>
-                <input onChange={handleChange} type="number" min="0" id="price" name="Product_Price" required/>
+                <input onChange={handleChange} type="number" min="0" max="1000" id="price" name="Product_Price" required/>
                 
                 <label for="quantity">Quantity Available:</label>
                 <input onChange={handleChange} type="number" id="quantity" min="0" max="1000" name="Quantity_Available" required/>
@@ -84,8 +84,8 @@ export default function AddListing(){
                     <option value="fashion">Fashion</option>
                     <option value="arts">Arts</option>
                     <option value="automotive">Automotive</option>
-                    <option value="baby">Baby</option>
-                    <option value="beauty">Beauty</option>
+                    <option value="baby">Baby Supplies</option>
+                    <option value="beauty">Beauty Items</option>
                     <option value="books">Books</option>
                     <option value="electronics">Electronics</option>
                     <option value="grocery">Grocery</option>
