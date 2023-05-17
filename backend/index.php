@@ -143,7 +143,7 @@ $router->get("/logout", function () {
 $router->post("/upload", function () {
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
-    $_POST["SID"] = 3;
+    $_POST["SID"] = $_SESSION["ID"];
     $name = $_POST["Product_Name"];
     $price = $_POST["Product_Price"];
     $quantity = $_POST["Quantity_Available"];

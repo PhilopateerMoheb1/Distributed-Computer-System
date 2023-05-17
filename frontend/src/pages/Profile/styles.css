@@ -15,6 +15,12 @@
 .contact-info-block{
   margin-bottom: 20px;
 }
+.Empty{
+  color: white;
+  font-family:cursive;
+  font-size: 4em;
+  text-align: center;
+}
 
 /*
   basic info section

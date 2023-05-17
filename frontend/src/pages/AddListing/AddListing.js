@@ -8,12 +8,14 @@ import swal from 'sweetalert2'
 export default function AddListing(){
 
     const [inputs,setInputs] = useState({});
+    const [userID,setID] = useState(); 
     axios.defaults.withCredentials = true;
     useEffect(()=>{
         axios.get('http://localhost:80/session').then(
             (response) => {
                 console.log(response)
                 if("ID" in response.data){
+                    setID(response.data.ID)
                 }
                 else{
                     window.location = "/login";
@@ -35,7 +37,7 @@ export default function AddListing(){
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-        console.log(value);       
+             
         setInputs(values => ({...values,[name]: value}));
     }
 
@@ -43,7 +45,6 @@ export default function AddListing(){
         event.preventDefault();
         console.log(inputs)
         axios.post('http://localhost:80/upload',inputs).then(function (response) {
-            console.log(response.data[0]);
         });
         swal.fire({
             title: "Done!",

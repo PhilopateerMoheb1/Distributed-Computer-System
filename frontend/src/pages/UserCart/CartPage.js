@@ -44,7 +44,7 @@ export default function UserInfoPage(){
             <div className="mycart-body">
                 {/* item row */}
                
-                {
+                {/* {
                                   data.map((dataItem,index)=>{
                                     return(
                                         <CartPage
@@ -56,7 +56,7 @@ export default function UserInfoPage(){
                                         />
                                     );
             
-                                })}
+                                })} */}
 
             </div>
 

@@ -70,13 +70,14 @@ export default function Login(){
                         </div>
 
                         <div className="mb-3 justify-content-center login-form-actions">
-                            <button type="submit" className="btn btn-outline-primary login_form_btn">Submit</button>
+                            <button type="submit" className="btn btn-outline-primary login_form_btn">Login</button>
                             <br/>
-                            <div className="new-user-register">
-                                <a href="../Register/register_page.php" className="new_user_link">
+                            <br/>
                                         new user? Register
-                                </a>
-                            </div>
+                            <br/>
+                            <a href="/Register">
+                            <button type="button" className="btn btn-outline-primary login_form_btn">Register</button>
+                            </a>
                         </div>
                     </form>
                 </div>

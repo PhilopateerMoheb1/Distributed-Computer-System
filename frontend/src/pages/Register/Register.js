@@ -170,10 +170,11 @@ export default function Register(){
                                 <div className="mb-3 justify-content-center align-items-center register-form-actions">
                                     <button type="submit" className="btn btn-outline-primary register_form_btn">Register</button>                            
                                     <div className="old-user-login">
-                                        <a href="../Login/login_page.php" className="old_user_link">
-                                            have an account? Login
-                                        </a>
+                                            Have An Account?
                                     </div>
+                                    <a href="/login">
+                                    <button type="button" className="btn btn-outline-primary register_form_btn">Login</button> 
+                                    </a>
                                 </div>
                                 </div>
                             </div>

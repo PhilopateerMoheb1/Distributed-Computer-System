@@ -72,6 +72,7 @@ export default function Home(){
                                         category = {dataItem.Category}
                                         img = {dataItem.Product_Picture}
                                         available = {dataItem.Quantity_Available==0? <p style={{"color":"red"}}>Out of Stock!</p>:dataItem.Quantity_Available}
+                                        description = {dataItem.Product_Description}
                                         />
                                     );
             
