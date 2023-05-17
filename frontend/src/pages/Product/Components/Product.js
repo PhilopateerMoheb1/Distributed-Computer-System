@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function Product(props){
   const [Userdata,setUserData] = useState({});
+  const [Sellerdata,setSellerData] = useState({});
   const [data,setProductData] = useState([]);
   var pathname = window.location.pathname
   pathname = pathname.substring(pathname.lastIndexOf("/"))
@@ -14,7 +15,6 @@ function Product(props){
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
         (response) => {
-            console.log(response)
             if("ID" in response.data){
               setUserData(response.data)
             }
@@ -23,6 +23,11 @@ function Product(props){
     axios.get(URL)
     .then(function (response) {
       setProductData(response.data[0]);
+      axios.post('http://localhost:80/getSellers',response.data[0].SID).then(
+        (response) => {
+          setSellerData(response.data)
+        }
+    );
     })
 
 },[]);
@@ -61,8 +66,10 @@ function formatDate(date) {
               )
             }
             else if(balance>=data.Product_Price){
-                let inputs = ["Cash_Balance",Userdata.Cash_Balance-data.Product_Price,"Name",Userdata.Name]
+                let inputs = ["Cash_Balance",Userdata.Cash_Balance-data.Product_Price,"ID",Userdata.ID]
                 axios.post('http://localhost:80/newtransaction',inputs);
+                inputs = ["Cash_Balance",parseInt(Sellerdata[0].Cash_Balance)+parseInt(data.Product_Price),"ID",data.SID];
+                axios.post('http://localhost:80/payseller',inputs);
                 inputs = ["Quantity_Available",data.Quantity_Available-1,"Product_Name",data.Product_Name]
                 axios.post('http://localhost:80/newtransaction',inputs);
                 let TransactionInputs = {PID:data.PID, BID:Userdata.ID, SID:data.SID, Transaction_Date:formatDate(new Date())};

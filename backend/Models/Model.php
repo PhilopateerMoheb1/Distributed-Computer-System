@@ -45,6 +45,15 @@ class Model
 		$stmt->execute($arr);
 		return $stmt->fetchAll();
 	}
+	public function getBydb1($col, $val)
+	{
+		$sql = "SELECT * FROM " . $this->name . " WHERE " . $col . "=?;";
+		$stmt = $this->pdo1->prepare($sql);
+		$arr = [];
+		array_push($arr, $val);
+		$stmt->execute($arr);
+		return $stmt->fetchAll();
+	}
 	public function getByInTransaction($col,$In)
 	{
 		$sql = "SELECT * FROM " . $this->name.",transaction" . " WHERE " . "product.PID" . " IN". $In." AND transaction.PID = product.PID;";
