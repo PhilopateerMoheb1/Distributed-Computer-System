@@ -49,8 +49,10 @@
         if ( !(preg_match('/^[+][0-9]{9,14}+$/', $phone)||preg_match('/^[0-9]{9,14}+$/', $phone)) ){
             $errphone = "phone must be numbers only";
         }
-        $checkphone = mysqli_query($connection,"SELECT * FROM users WHERE Phone_Number = '$phone'");
-        if (mysqli_num_rows($checkphone)){
+        $checkphoneSeller = mysqli_query($connectionDB2,"SELECT * FROM seller_basic_data WHERE Phone_Number = '$phone'");
+        $checkphoneBuyer = mysqli_query($connectionDB2,"SELECT * FROM buyer WHERE Phone_Number = '$phone'");
+        
+        if (mysqli_num_rows($checkphoneSeller) || mysqli_num_rows($checkphoneBuyer)){
             
             $errphone = "This phone is already exist!";
         }
@@ -70,8 +72,10 @@
         }
                 //------- check if this email is exist
         else{
-            $check = mysqli_query($connection,"SELECT * FROM users WHERE Email = '$email'");
-            if (mysqli_num_rows($check)){
+            $checkemailSeller = mysqli_query($connectionDB1,"SELECT * FROM seller WHERE email = '$email'");
+            $checkemailBuyer = mysqli_query($connectionDB2,"SELECT * FROM buyer WHERE email = '$email'");
+            
+            if (mysqli_num_rows($checkemailSeller) || mysqli_num_rows($checkemailBuyer)){
                 $erremail = "This email is already exist!";
             }
         }
@@ -128,9 +132,12 @@
             $hashed_pass = md5($pass);
 
             $Role_aa = array("User"=>"0", "Seller"=>"1"); 
-            $sql_Insert = "INSERT INTO users(Name, Address, Phone_Number, Email, Password, Gender, DOB, Role, Cash_Balance) 
+            echo $phone . $role;
+            $sql_Insert = "INSERT INTO user (Name, Address, Phone_Number, Email, Password, Gender, DOB, role, cash_balance) 
                                     VALUES('$name', '$address', '$phone', '$email', '$hashed_pass', '$gender', '$dob', '$Role_aa[$role]', '4000')";
-            $result = mysqli_query($connection, $sql_Insert);
+            $result = mysqli_query($connectionDB1, "INSERT INTO user (Name, Address, Phone_Number, Email, Password, Gender, DOB, role, cash_balance) 
+            VALUES('$name', '$address', '$phone', '$email', '$hashed_pass', '$gender', '$dob', '$Role_aa[$role]', '4000')");
+            mysqli_query($connectionDB1, "DELETE FROM user");
             if ($result){
                 header("Location: register_page.php?sucess=Your Account has been registered successfully!");
                 exit();
