@@ -32,36 +32,51 @@
             }
             else{
                 $hashed_pass = md5($uPass);
-                $sql = "SELECT * FROM users WHERE Email='$uEmail' AND Password='$hashed_pass' ";
-                $result = mysqli_query($connection, $sql);
+                $sql_buyer = "SELECT * FROM buyer WHERE Email='$uEmail' AND Password='$hashed_pass' ";
+                $resultBuyer = mysqli_query($connectionDB2, $sql_buyer);
+                $result = null;
+                if (mysqli_num_rows($resultBuyer) == 1){
+                    $result = $resultBuyer;
+                }else{
+                    $resultSeller = mysqli_query($connectionDB1, "SELECT * FROM seller WHERE Email='$uEmail' AND Password='$hashed_pass' ");
+                    if (mysqli_num_rows($resultSeller) == 1){
+                        $result = $resultSeller; 
+                    }
+                }   
+
                 print_r($result);
-                if (mysqli_num_rows($result) == 1){
+                if ($result != null){
                     $row = mysqli_fetch_assoc($result);
-                    if ($row['Email'] === $uEmail && $row['Password'] === $hashed_pass){
-                        $_SESSION['Name'] = $row['Name'];
-                        $_SESSION['Email'] = $row['Email'];
-                        $_SESSION['Gender'] = $row['Gender'];
-                        $_SESSION['Role'] = $row['Role'];
-                        $_SESSION['Cach Balance'] = $row['Cach_Balance'];
-                        $_SESSION['ID'] = $row['ID'];
+                    if ($row['email'] === $uEmail && $row['password'] === $hashed_pass){
+                        $_SESSION['Name'] = $row['name'];
+                        $_SESSION['Email'] = $row['email'];
+                        $_SESSION['Password'] = $row['password'];
+                        $_SESSION['Role'] = $row['role'];
+                        $_SESSION['Cach Balance'] = $row['cash_balance'];
 
-
-                        $_SESSION['Address'] = $row['Address'];
-                        $_SESSION['Phone Number'] = $row['Phone_Number'];
+                        if($_SESSION['Role'] == 1){
+                            $id = $row['id'];
+                            $resultSeller = mysqli_query($connectionDB2, "SELECT * FROM seller_basic_data WHERE ID='$id' ");
+                            $row = mysqli_fetch_assoc($resultSeller);
+                        }
+                        $_SESSION['Gender'] = $row['gender'];
+                        $_SESSION['Address'] = $row['address'];
+                        $_SESSION['Phone Number'] = $row['phone_number'];
                         $_SESSION['DOB'] = $row['DOB'];
-                        $_SESSION['Password'] = $row['Password'];
+                        $_SESSION['ID'] = $row['id'];
 
                         header("Location: ../home.php");
                         exit();
                     }
                     else {
-                        if ($row['Email'] === $uEmail)
+                        if ($row['email'] === $uEmail)
                             header("Location: Login_page.php?error=Wrong Email or Password!");
                         else if ($row['Password'] === md5($uPass))
                             header("Location: Login_page.php?error=Wrong Email or Password!");
                         exit();
                     }
                 }
+
                 else {
                     header("Location: Login_page.php?error=Wrong Email or Password");
                     exit();
