@@ -43,17 +43,17 @@ export default function UserInfo(props){
                 <h6 className="card-subtitle mb-2 text-body-secondary">The basic personal information of the user.</h6>
                 <table className="table">
                   <tbody>
-                    <tr>
-                      <th className="table-item" scope="row tbl-row">User Name</th>
-                      <td className="table-item">{props.name}</td>
+                    <tr className="row">
+                      <th className="table-item col col-lg-6" scope="row tbl-row">User Name</th>
+                      <td className="table-item col col-lg-6">{props.name}</td>
                     </tr>
-                    <tr>
-                      <th className="table-item" scope="row tbl-row">Birthday</th>
-                      <td className="table-item">{props.date}</td>
+                    <tr className="row">
+                      <th className="table-item col col-lg-6" scope="row tbl-row">Birthday</th>
+                      <td className="table-item col col-lg-6">{props.date}</td>
                     </tr>
-                    <tr>
-                      <th className="table-item" scope="row tbl-row">Gender</th>
-                      <td className="table-item">{props.gender}</td>
+                    <tr className="row">
+                      <th className="table-item col col-lg-6" scope="row tbl-row">Gender</th>
+                      <td className="table-item col col-lg-6">{props.gender}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -69,17 +69,17 @@ export default function UserInfo(props){
                 <h6 className="card-subtitle mb-2 text-body-secondary">The contact information of the user.</h6>
                 <table className="table">
                   <tbody>
-                    <tr>
-                      <th className="table-item" scope="row tbl-row">Email</th>
-                      <td className="table-item">{props.email}</td>
+                    <tr className="row">
+                      <th className="table-item col col-lg-6" scope="row tbl-row">Email</th>
+                      <td className="table-item col col-lg-6">{props.email}</td>
                     </tr>
-                    <tr>
-                      <th className="table-item" scope="row tbl-row">Phone Number</th>
-                      <td className="table-item">{props.phone}</td>
+                    <tr className="row">
+                      <th className="table-item col col-lg-6" scope="row tbl-row">Phone Number</th>
+                      <td className="table-item col col-lg-6">{props.phone}</td>
                     </tr>
-                    <tr>
-                      <th className="table-item" scope="row tbl-row">Address</th>
-                      <td className="table-item">{props.address}</td>
+                    <tr className="row">
+                      <th className="table-item col col-lg-6" scope="row tbl-row">Address</th>
+                      <td className="table-item col col-lg-6">{props.address}</td>
                     </tr>
                   </tbody>
                 </table>
@@ -95,9 +95,9 @@ export default function UserInfo(props){
                 <h6 className="card-subtitle mb-2 text-body-secondary">The credit card information of the user.</h6>
                 <table className="table">
                   <tbody>
-                    <tr>
-                      <th className="table-item" scope="row tbl-row">Cash Balance</th>
-                      <td className="table-item">{props.cash} L.E.</td>
+                    <tr className="row">
+                      <th className="table-item col col-lg-6" scope="row tbl-row">Cash Balance</th>
+                      <td className="table-item col col-lg-6">{props.cash} L.E.</td>
                     </tr>
                   </tbody>
                 </table>

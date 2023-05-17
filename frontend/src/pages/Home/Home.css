@@ -57,5 +57,5 @@ p.subtitle.text-secondary {
 }
 .HomeContainer{
     margin-top: 80px;
-    
+    min-width: 100vw;
 }
