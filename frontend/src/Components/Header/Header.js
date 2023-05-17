@@ -24,6 +24,7 @@ export default function Header(){
     useEffect(()=>{
         setInputs(values => ({...values,["range"]: [0, 1000]}));
         setInputs(values => ({...values,["category"]: "all"}));
+        setInputs(values => ({...values,["search"]: ""}));
         axios.get('http://localhost:80/session')     
             .then((response) => {
                 var objectConstructor = ({}).constructor;
