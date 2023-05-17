@@ -82,12 +82,12 @@ export default function Login(){
                         </div>
                         
                         <div className="mb-3 justify-content-center login-form-actions">
-                            <button type="submit" className="btn btn-outline-primary login_form_btn">Login</button>
+                            <button type="submit" className="btn  login_form_btn">Login</button>
                         </div>
                             <label for="register" className="form-label login_label">new user?</label>
                         <div className="mb-3 justify-content-center login-form-actions">
                             <a href="/Register">
-                            <button id="register" type="button" className="btn btn-outline-primary login_form_btn">Register</button>
+                            <button id="register" type="button" className="btn  login_form_btn">Register</button>
                             </a>
                         </div>
                     </form>

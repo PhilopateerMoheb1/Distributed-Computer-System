@@ -128,7 +128,7 @@ export default function Header(){
                             <div className="styled" style = {{ width: "20%"}}>
                                 <Slider className="slider" style={{zIndex:"99"}} value = {range} min={0} max={1000} onChange = {handleChanges} valueLabelDisplay="auto"/>
                             </div>
-                            <Button type="submit" className="Header-Button mx-auto btn-primary" >Search</Button>
+                            <button type="submit" className="Header-Button btn mx-auto">Search</button>  
                             </Form>
                         </Nav>
                         {data.constructor ===({}).constructor && "ID" in data ?
@@ -146,7 +146,6 @@ export default function Header(){
                             </div> id="navbarScrollingDropdown">
                             <NavDropdown.Item href="/userInfo">Profile</NavDropdown.Item>
                             {data.Role==="Seller"?<NavDropdown.Item href="/AddListing">AddListing</NavDropdown.Item>:null}
-                            <NavDropdown.Item href="/Cart">Cart</NavDropdown.Item>
                             <NavDropdown.Item href="/CreditCard">{data.Cash_Balance}<img className="thumbnail-image" 
                                     src={coin} 
                                     alt="dollars"
@@ -164,7 +163,6 @@ export default function Header(){
                         navbarScroll>
                             <Nav.Link  style={{color:"white"}} className="m-auto" href="/login">Login</Nav.Link>
                             <Nav.Link  style={{color:"white"}} className="m-auto" href="/Register">Register</Nav.Link>
-                            <Nav.Link style={{color:"white"}} className="m-auto" href="/Cart">Cart</Nav.Link>
                         </Nav> }
                         
                         </Navbar.Collapse>

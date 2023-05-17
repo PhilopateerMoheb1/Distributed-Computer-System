@@ -111,7 +111,6 @@ export default class App extends React.Component {
                 onChange={this.handleInputChange}
                 onFocus={this.handleInputFocus}
               />
-              <small>E.g.: 49..., 51..., 36..., 37...</small>
             </div>
             <div className="form-group">
               <input
@@ -167,7 +166,7 @@ export default class App extends React.Component {
             </div>
             <input type="hidden" name="issuer" value={issuer} />
             <div className="gotcha form-actions">
-            <button  class=" paybutton btn btn-primary btn-lg">Pay</button>
+            <button  class=" paybutton btn btn-lg">Pay</button>
             
             </div>
             

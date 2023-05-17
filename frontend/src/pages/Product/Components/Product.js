@@ -82,7 +82,7 @@ function Product(props){
                 <div class="row gx-4 gx-lg-5 align-items-center">
                     <div class="col-md-6"><img class=" productIMG mb-5 mb-md-0" src={props.img} alt="..." /></div>
                     <div class="col-md-6">
-                        <div class="small mb-1">Category: {props.category}</div>
+                        <div class="small mb-1"><h5>Category: {props.category}</h5></div>
                         <h1 class="display-5 fw-bolder">{props.name}</h1>
                         <div class="fs-5 mb-5">
                             <span>{props.Product_Price} L.E.</span>
@@ -91,7 +91,7 @@ function Product(props){
                         </div>
                         <p class="lead">{props.description}</p>
                         <div class="d-flex">
-                            <div class="buttons"> <button class="btn btn-outline-warning btn-long cart">Add to Cart</button> <button onClick={handleClick} class="btn btn-warning btn-long buy">Buy it Now</button>  </div>
+                            <div class="buttons">  <button onClick={handleClick} class="btn btn-warning btn-long buy">Buy it Now</button>  </div>
                         </div>
                     </div>
                 </div>

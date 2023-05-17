@@ -36,7 +36,6 @@ function Footer() {
                             <ul className="footer-links">
                                 <li><a href="/">Home</a></li>
                                 <li><a href="/userinfo">Profile</a></li>
-                                <li><a href="/events">Cart</a></li>
                                 {showLogin?<li><a href="/login">Login</a></li>:null}
                                 {showLogin?<li><a href="/register">Register</a></li>:null}
                             </ul>

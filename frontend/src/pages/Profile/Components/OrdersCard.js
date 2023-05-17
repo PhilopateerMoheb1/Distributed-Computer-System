@@ -3,7 +3,7 @@
 export default function OrdersCard(props){
     return(
         <div>
-                        <a href="#" class="list-group-item list-group-item-action">
+                        <a href="#" class="list-group-item list-group-item-action mb-2">
               <div class="row">
                 <div class="col col-lg-2">
                   <img src={props.img} alt="" class="img-fluid"/>

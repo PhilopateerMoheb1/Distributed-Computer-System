@@ -35,7 +35,7 @@ export default function UserInfo(props){
               </a>
             </li>
             {showYourListings ? <li>
-              <a href="./orders" className="nav-link text-white">
+              <a href="./orders" className="nav-link text-black">
                 <svg className="bi pe-none me-2" width="16" height="16">
                   <use href="#speedometer2"></use>
                 </svg>
@@ -43,7 +43,7 @@ export default function UserInfo(props){
               </a>
             </li>:null }
             <li>
-              <a href="./transactions" className="nav-link text-white">
+              <a href="./transactions" className="nav-link text-black">
                 <svg className="bi pe-none me-2" width="16" height="16">
                   <use href="#table"></use>
                 </svg>

@@ -36,9 +36,19 @@
     justify-self: center;
     align-self: center;
     margin: 0 auto;
+    background-color: #E28904;
+    border: 0px;
+    color:#fff
 }
+
+.login_form_btn:hover{
+    background-color: #E28904;
+    filter: brightness(85%);
+    color:#fff
+}
+
 .login_body{
-    background-color:cadetblue;
+    background-color:#E3E6E6;
 }
 
 .new_user_link{

@@ -47,7 +47,7 @@ export default function Transactions(){
       <hr/>
       <ul class="nav nav-pills flex-column mb-auto">
         <li>
-          <a href="./userInfo" class="nav-link text-white">
+          <a href="./userInfo" class="nav-link text-black">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use href="#home"></use>
             </svg>
@@ -55,7 +55,7 @@ export default function Transactions(){
           </a>
         </li>
         {showYourListings ? <li>
-          <a href="./orders" class="nav-link text-white">
+          <a href="./orders" class="nav-link text-black">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use href="#speedometer2"></use>
             </svg>

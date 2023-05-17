@@ -22,8 +22,7 @@ export default function HomeCard(props){
                 </div>
                 <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
                     <div className="home-product-card row">
-                        <a className="btn btn-outline-dark mt-auto" href="#">Add to Cart</a>
-                        <a className="btn btn-outline-dark mt-auto" href={"/Products/"+props.id}>View Product</a>
+                        <a className="btn view-product  mt-auto" href={"/Products/"+props.id}>View Product</a>
                     </div>
                 </div>
             </div>

@@ -32,7 +32,7 @@
     padding: 0;
 }
 .Header-Navbar {
-    background-color: #155E63;
+    background-color: #000000;
     padding-top: 1.5rem;
     padding-bottom: 1.5rem;  
 }
@@ -50,17 +50,26 @@
 
 .Header-Button{
     margin-left: 1rem;
+    color: white;
+    background-color: #F3A847;
+    border: 0px;
+}
+
+.Header-Button:hover{
+    background-color: #F3A847;
+    color: white;
+    filter: brightness(85%);
 }
 
 .styled select {
     display: flexbox;
-    background: #EEE;
+    background: #F3F3F3;
     height: 100%;
     font-size: 16px;
   }
 .styled .slider {
     display: flexbox;
-    background: #EEE;
+    background: #F3F3F3;
     font-size: 10px;
     width: 80%;
     z-index: 99;
@@ -71,8 +80,8 @@
     text-align: center;
     align-items: center;
     justify-content: center;
-    border:2px solid #EEE;
-    background:  #EEE;
+    border:2px solid #F3F3F3;
+    background:  #F3F3F3;
 }
 
 .Nav-link {

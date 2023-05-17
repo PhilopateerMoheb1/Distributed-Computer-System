@@ -2,6 +2,7 @@
     top: 0;
     left: 0;
     right: 0;
+    background-color: #232F3E;
 }
 
 .home-welcome-two {
@@ -12,7 +13,7 @@
     height: 150px;
     background-size: cover;
     background-position: center;
-    background-color: #f8f9fa; 
+    background-color: #E3E6E6; 
 }
 
 .home-product-description {
@@ -22,7 +23,7 @@
 }
 
 section.home-welcome-two {
-    background-color: #f8f9fa; /* Change this to the lighter color you want */
+    background-color: #E3E6E6; /* Change this to the lighter color you want */
 }
 
 .home-welcome-two h3{
@@ -44,7 +45,17 @@ p.subtitle.text-secondary {
 
 .home-product-card .btn{
     margin-bottom: 0.5rem;
+    background-color: #E28904;
+    color: white;
+}
+
+.home-product-card .btn:hover{
+    margin-bottom: 0.5rem;
+    background-color: #E28904;
+    color: white;
+    filter: brightness(85%);
 }
 .HomeContainer{
     margin-top: 80px;
+    
 }

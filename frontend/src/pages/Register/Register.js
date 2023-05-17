@@ -169,12 +169,12 @@ export default function Register(){
                                 </div>
 
                                 <div className="mb-3 justify-content-center align-items-center register-form-actions">
-                                    <button type="submit" className="btn btn-outline-primary register_form_btn">Register</button>                            
+                                    <button type="submit" className="btn register_form_btn">Register</button>                            
                                     <div className="old-user-login">
                                             Have An Account?
                                     </div>
                                     <a href="/login">
-                                    <button type="button" className="btn btn-outline-primary register_form_btn">Login</button> 
+                                    <button type="button" className="btn register_form_btn">Login</button> 
                                     </a>
                                 </div>
                                 </div>

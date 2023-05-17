@@ -37,7 +37,7 @@ export default function Orders(){
       <hr/>
       <ul class="nav nav-pills flex-column mb-auto">
         <li>
-          <a href="./userinfo" class="nav-link text-white">
+          <a href="./userinfo" class="nav-link text-black">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use href="#home"></use>
             </svg>
@@ -53,7 +53,7 @@ export default function Orders(){
           </a>
         </li>
         <li>
-          <a href="./transactions" class="nav-link text-white">
+          <a href="./transactions" class="nav-link text-black">
             <svg class="bi pe-none me-2" width="16" height="16">
               <use href="#table"></use>
             </svg>

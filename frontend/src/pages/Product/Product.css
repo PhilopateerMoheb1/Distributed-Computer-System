@@ -45,22 +45,23 @@
 
 .buttons .buy {
     color: #fff;
-    background-color: #ff7676;
-    border-color: #ff7676
+    background-color: #E28904;
+    border-color: #E28904
 }
 
 .buttons .buy:focus,
 .buy:active {
     color: #fff;
-    background-color: #ff7676;
-    border-color: #ff7676;
+    background-color: #E28904;
+    border-color: #E28904;
     box-shadow: none
 }
 
 .buttons .buy:hover {
     color: #fff;
-    background-color: #e86464;
-    border-color: #e86464
+    background-color: #E28904;
+    border-color: #E28904;
+    filter: brightness(85%);
 }
 
 

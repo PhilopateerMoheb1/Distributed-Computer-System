@@ -7,6 +7,17 @@
   min-height: 100vh;
 }
 
+.paybutton{
+  background-color: #E28904;
+  border: 0px;
+  color:#fff;
+}
+
+.paybutton:hover{
+  background-color: #E28904;
+  color:#fff;
+  filter: brightness(85%);
+}
 
 
 .creditH1 {

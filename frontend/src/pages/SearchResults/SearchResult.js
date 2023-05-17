@@ -26,11 +26,11 @@ export default function SearchResult(results){
 
     return(
         <div class="HomeContainer">
-            <div className="home-welcome-one bg-dark py-5">
+            <div className="home-welcome-one py-5">
                 <div className="container px-4 px-lg-5 my-5">
                     <div className="text-center text-white">
-                        <h1 className="display-4 fw-bolder">Site Store</h1>
-                        <p className="lead fw-normal text-white-50 mb-0">A Store You Can Trust</p>
+                        <h1 className="display-4 fw-bolder">ALL MART</h1>
+                        <p className="lead fw-normal text-white-50 mb-0">YOUR ONE STOP WORLDWIDE MARKET</p>
                     </div>
                 </div>
             </div>
