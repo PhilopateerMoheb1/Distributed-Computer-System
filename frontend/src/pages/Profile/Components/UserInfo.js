@@ -22,44 +22,21 @@ export default function UserInfo(props){
     return(
       
       
-      <div className="d-flex flex-nowrapp">
-        <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-tertiary" style={{ width: "280px", height: "610px" }}>
-          <hr />
-          <ul className="nav nav-pills flex-column mb-auto">
-            <li className="nav-item">
-              <a href="./userInfo" className="nav-link active" aria-current="page">
-                <svg className="bi pe-none me-2" width="16" height="16">
-                  <use href="#home"></use>
-                </svg>
-                User Info
-              </a>
-            </li>
-            {showYourListings ? <li>
-              <a href="./orders" className="nav-link text-black">
-                <svg className="bi pe-none me-2" width="16" height="16">
-                  <use href="#speedometer2"></use>
-                </svg>
-                Your Listings
-              </a>
-            </li>:null }
-            <li>
-              <a href="./transactions" className="nav-link text-black">
-                <svg className="bi pe-none me-2" width="16" height="16">
-                  <use href="#table"></use>
-                </svg>
-                Transactions
-              </a>
-            </li>
-          </ul>
-
-
+      <div class="row" style={{paddingTop: "50px", paddingBottom: "50px"}}>
+        <div class="col-3" style={{paddingLeft: "50px"}}>
+          <div class="list-group" id="list-tab" role="tablist">
+            <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="./userInfo" role="tab" aria-controls="list-home">User Info</a>
+            <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="./orders" role="tab" aria-controls="list-profile">Your Listings</a>
+            <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="./transactions" role="tab" aria-controls="list-messages">Transactions</a>
+            
+          </div>
         </div>
+        <div class="col-9" style={{paddingRight: "150px"}}>
+          <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+              
 
-        <div className="b-example-divider b-example-vr"></div>
-
-        <div className="d-flex flex-column flex-shrink-0 p-3 text-bg-tertiary" style={{ margin: "0 auto", width: "800px" }}>
-          <hr />
-          <div className="basic-info-block">
+            <div className="basic-info-block">
             <div className="card">
               <div className="card-body">
                 <h5 className="card-title">Basic Info</h5>
@@ -119,7 +96,7 @@ export default function UserInfo(props){
                 <table className="table">
                   <tbody>
                     <tr>
-                      <th className="table-item" scope="row tbl-row" style={{ width: "350px" }}>Cash Balance</th>
+                      <th className="table-item" scope="row tbl-row">Cash Balance</th>
                       <td className="table-item">{props.cash} L.E.</td>
                     </tr>
                   </tbody>
@@ -128,8 +105,15 @@ export default function UserInfo(props){
             </div>
           </div>
 
+
+
+            </div>
+            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">...</div>
+            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+            <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+          </div>
         </div>
-      </div>
+    </div>
 
 
     );

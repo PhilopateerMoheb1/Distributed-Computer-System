@@ -39,44 +39,21 @@ export default function Transactions(){
 
     return(
 
-<div>
-
-
-  <main class="d-flex flex-nowrap">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-tertiary" style={{width: "280px", height: "610px"}}>
-      <hr/>
-      <ul class="nav nav-pills flex-column mb-auto">
-        <li>
-          <a href="./userInfo" class="nav-link text-black">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use href="#home"></use>
-            </svg>
-            User Info
-          </a>
-        </li>
-        {showYourListings ? <li>
-          <a href="./orders" class="nav-link text-black">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use href="#speedometer2"></use>
-            </svg>
-            Your Listings
-          </a>
-        </li>:null}
-        <li class="nav-item">
-          <a href="./transactions" class="nav-link active" aria-current="page">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use href="#table"></use>
-            </svg>
-            Transactions
-          </a>
-        </li>
-      </ul>
+<div class="row" style={{paddingTop: "50px", paddingBottom: "50px"}}>
+  <div class="col-3" style={{paddingLeft: "50px"}}>
+    <div class="list-group" id="list-tab" role="tablist">
+      <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="./userInfo" role="tab" aria-controls="list-home">User Info</a>
+      <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="./orders" role="tab" aria-controls="list-profile">Your Listings</a>
+      <a class="list-group-item list-group-item-action active" id="list-messages-list" data-bs-toggle="list" href="./transactions" role="tab" aria-controls="list-messages">Transactions</a>
+      
     </div>
+  </div>
+  <div class="col-9" style={{paddingRight: "150px"}}>
+    <div class="tab-content" id="nav-tabContent">
+      
+      <div class="tab-pane fade show active" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
 
-    <div class="b-example-divider b-example-vr"></div>
-
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-tertiary" style={{margin:"0 auto",width: "800px"}}>
-      <hr/>
+        
       <ol class="list-group">
         <li class="list-group-item">
           <div class="row" style={{paddingBottom: "45px"}}>
@@ -100,9 +77,12 @@ export default function Transactions(){
         </li>
       </ol>
 
-    </div>
-  </main>
 
+      </div>
+      
+    </div>
+  </div>
 </div>
+
 );
 }

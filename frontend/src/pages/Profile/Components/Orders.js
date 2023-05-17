@@ -29,74 +29,48 @@ export default function Orders(){
   );
 },[]);
     return(
-<div class="ProfileContainer">
-
-
-  <main class="d-flex flex-nowrap">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-tertiary" style={{width: "280px", height: "610px"}}>
-      <hr/>
-      <ul class="nav nav-pills flex-column mb-auto">
-        <li>
-          <a href="./userinfo" class="nav-link text-black">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use href="#home"></use>
-            </svg>
-            User Info
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./orders" class="nav-link active" aria-current="page">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use href="#speedometer2"></use>
-            </svg>
-            Your Listings
-          </a>
-        </li>
-        <li>
-          <a href="./transactions" class="nav-link text-black">
-            <svg class="bi pe-none me-2" width="16" height="16">
-              <use href="#table"></use>
-            </svg>
-            Transactions
-          </a>
-        </li>
-      </ul>
-      
-    </div>
-
-    <div class="b-example-divider b-example-vr"></div>
-
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-tertiary" style={{margin: "0 auto", width: "1200px"}}>
-      <hr/>
-      <div class="row">
-
-        <div class="col col-bg-6">
-          <div class="list-group">
-
-            { empty? <p class = "Empty">You haven't Made any Listings!</p>:
-                        data.map((dataItem,index)=>{
-                        
-                          return(
-                              <OrdersCard name = {dataItem.Product_Name}
-                              category = {dataItem.Category}
-                              description = {dataItem.Product_Description}
-                              img = {dataItem.Product_Picture}
-                              quantity = {dataItem.Quantity_Available}
-                              />
-                          );
-  
-                      })}
+      <div class="row" style={{paddingTop: "50px", paddingBottom: "50px"}}>
+        <div class="col-3" style={{paddingLeft: "50px"}}>
+          <div class="list-group" id="list-tab" role="tablist">
+          <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="./userInfo" role="tab" aria-controls="list-home">User Info</a>
+      <a class="list-group-item list-group-item-action active" id="list-profile-list" data-bs-toggle="list" href="./orders" role="tab" aria-controls="list-profile">Your Listings</a>
+      <a class="list-group-item list-group-item-action " id="list-messages-list" data-bs-toggle="list" href="./transactions" role="tab" aria-controls="list-messages">Transactions</a>
             
+          </div>
+        </div>
+        <div class="col-9" style={{paddingRight: "150px"}}>
+          <div class="tab-content" id="nav-tabContent">
+            
+            <div class="tab-pane fade show active" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+            <div class="row">
+
+<div class="col col-bg-6">
+  <div class="list-group">
+
+    { empty? <p class = "Empty">You haven't Made any Listings!</p>:
+                data.map((dataItem,index)=>{
+                
+                  return(
+                      <OrdersCard name = {dataItem.Product_Name}
+                      category = {dataItem.Category}
+                      description = {dataItem.Product_Description}
+                      img = {dataItem.Product_Picture}
+                      quantity = {dataItem.Quantity_Available}
+                      />
+                  );
+
+              })}
+    
 
 
 
+  </div>
+</div>
+</div>
+            </div>
+            
           </div>
         </div>
       </div>
-
-    </div>
-  </main>
-
-</div>
 );
 }
