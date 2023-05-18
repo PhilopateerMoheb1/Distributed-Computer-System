@@ -63,6 +63,15 @@ class Model
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
+	public function getByInSold($col, $In,$SID)
+	{
+		$sql = "SELECT * FROM " . $this->name . ",transaction" . " WHERE " . "product.PID" . " IN" . $In . " AND transaction.PID = product.PID AND transaction.SID = ".$SID.";";
+		$stmt = $this->pdo3->prepare($sql);
+		$arr = [];
+		array_push($arr, $In);
+		$stmt->execute();
+		return $stmt->fetchAll();
+	}
 	public function getByIn($col, $In)
 	{
 		$sql = "SELECT * FROM " . $this->name . ",transaction" . " WHERE " . "product.PID" . " IN" . $In . " AND transaction.PID = product.PID;";

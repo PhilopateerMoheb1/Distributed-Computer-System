@@ -4,7 +4,7 @@ import {useState, useEffect} from "react";
 import axios from 'axios';
 import TransactionCard from "./TransactionCard"
 
-export default function Transactions(){
+export default function Listings(){
   const [Userdata,setUserData] = useState();
   let user;
   const [data,setData] = useState([]);
@@ -14,21 +14,24 @@ export default function Transactions(){
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
       (response) => {
+        
         setUserData(response.data.ID);
         user = response.data.ID;
         if("ID" in response.data && response.data.Role === "Seller"){
           setShowYourListings(true);
         }
           if("ID" in response.data){
-            axios.post('http://localhost:80/gettransaction',response.data.ID)
+            axios.post('http://localhost:80/getsold',response.data.ID)
             .then(function (response) {
+                
                  
                   if(response.data.length === 0){
                     setEmpty(true)
                   }
                   else{
-                  axios.post('http://localhost:80/product',[response.data,user])
+                  axios.post('http://localhost:80/sold',[response.data,user])
                   .then(function(response) {
+                    console.log(response.data);
                     setData(response.data)
                   })
                 }
@@ -49,8 +52,8 @@ export default function Transactions(){
     <div class="list-group" id="list-tab" role="tablist">
       <a class="list-group-item list-group-item-action" id="list-home-list" data-bs-toggle="list" href="./userInfo" role="tab" aria-controls="list-home">User Info</a>
       {showYourListings?<a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="./orders" role="tab" aria-controls="list-profile">Listings Added</a>:null}
-      {showYourListings?<a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="./Listings" role="tab" aria-controls="list-profile">Sold Items</a>:null}
-      <a class="list-group-item list-group-item-action active" id="list-messages-list" data-bs-toggle="list" href="./transactions" role="tab" aria-controls="list-messages">Bought Items</a>
+      {showYourListings?<a class="list-group-item list-group-item-action active" id="list-profile-list" data-bs-toggle="list" href="./Listings" role="tab" aria-controls="list-profile">Sold Items</a>:null}
+      <a class="list-group-item list-group-item-action " id="list-messages-list" data-bs-toggle="list" href="./transactions" role="tab" aria-controls="list-messages">Bought Items</a>
       
     </div>
   </div>

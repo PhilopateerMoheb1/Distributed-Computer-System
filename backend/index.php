@@ -111,6 +111,12 @@ $router->post("/gettransaction", function () {
     $_POST = convert_object_to_array($_POST);
     echo json_encode($transactionmodel->getBY("BID", $_POST));
 });
+$router->post("/getsold", function () {
+    $transactionmodel = new transaction();
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    echo json_encode($transactionmodel->getBY("SID", $_POST));
+});
 $router->post("/getlistings", function () {
     $productmodel = new products();
     $_POST = json_decode(file_get_contents('php://input'));
@@ -132,6 +138,18 @@ $router->post("/product", function () {
     $query = substr($query, 0, -1);
     $query = $query . ")";
     print_r(json_encode($productmodel->getByInTransaction("PID", $query,$_POST[1])));
+});
+$router->post("/sold", function () {
+    $productmodel = new products();
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    $query = "(";
+    foreach ($_POST[0] as &$value) {
+        $query = $query . $value["PID"] . ",";
+    }
+    $query = substr($query, 0, -1);
+    $query = $query . ")";
+    print_r(json_encode($productmodel->getByInSold("PID", $query,$_POST[1])));
 });
 
 
