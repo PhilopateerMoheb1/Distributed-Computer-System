@@ -10,7 +10,7 @@ function Product(props){
   const [Userdata,setUserData] = useState({});
   const [Sellerdata,setSellerData] = useState({});
   const [data,setProductData] = useState([]);
-  const [Quantity,setQuantity] = useState(0);
+  const [Quantity,setQuantity] = useState();
   var pathname = window.location.pathname
   pathname = pathname.substring(pathname.lastIndexOf("/"))
   const URL = "http://localhost:80/products" + pathname
@@ -79,7 +79,8 @@ function formatDate(date) {
                 axios.post('http://localhost:80/payseller',inputs);
                 inputs = ["Quantity_Available",data.Quantity_Available-Quantity,"Product_Name",data.Product_Name]
                 axios.post('http://localhost:80/newtransaction',inputs);
-                let TransactionInputs = {PID:data.PID, BID:Userdata.ID, SID:data.SID, Transaction_Date:formatDate(new Date())};
+                let TransactionInputs = {PID:data.PID, BID:Userdata.ID, SID:data.SID, Transaction_Date:formatDate(new Date()),Amount:Quantity};
+                console.log(TransactionInputs);
                 axios.post('http://localhost:80/transaction',TransactionInputs);
 
               swal.fire({

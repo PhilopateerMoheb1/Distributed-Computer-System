@@ -70,6 +70,7 @@ export default function Listings(){
             <div class="col col-bg-8"><h5>Item Name</h5></div>
             <div class="col col-bg-1"><h5>Item Price</h5></div>
             <div class="col col-bg-1"><h5>Transaction Date</h5></div>
+            <div class="col col-bg-1"><h5>Quantity</h5></div>
           </div>
 
           {empty? <p class="justify-content-center" style={{marginLeft: '33%'}}>You Haven't Made Any Transactions!</p>:data.map((dataItem,index)=>{
@@ -78,6 +79,7 @@ export default function Listings(){
                             price = {dataItem.Product_Price}
                             date = {dataItem.Transaction_Date}
                             image = {dataItem.Product_Picture}
+                            Amount = {dataItem.Amount}
                             />
                         );
 

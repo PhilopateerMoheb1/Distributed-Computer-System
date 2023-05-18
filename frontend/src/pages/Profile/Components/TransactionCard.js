@@ -9,6 +9,7 @@ export default function TransactionCard(props){
             <div class="col col-bg-6">{props.name}</div>
             <div class="col col-bg-2">{props.price}</div>
             <div class="col col-bg-2">{props.date}</div>
+            <div class="col col-bg-2">{props.Amount}</div>
           </div>
       </div>
     )}
