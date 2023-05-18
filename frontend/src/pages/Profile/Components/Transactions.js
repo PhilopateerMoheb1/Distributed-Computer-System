@@ -5,6 +5,8 @@ import axios from 'axios';
 import TransactionCard from "./TransactionCard"
 
 export default function Transactions(){
+  const [Userdata,setUserData] = useState();
+  let user;
   const [data,setData] = useState([]);
   const [empty,setEmpty] = useState(false);
   const [showYourListings,setShowYourListings] = useState(false);
@@ -12,17 +14,20 @@ export default function Transactions(){
   useEffect(()=>{
     axios.get('http://localhost:80/session').then(
       (response) => {
+        setUserData(response.data.ID);
+        user = response.data.ID;
         if("ID" in response.data && response.data.Role === "Seller"){
           setShowYourListings(true);
         }
           if("ID" in response.data){
             axios.post('http://localhost:80/gettransaction',response.data.ID)
             .then(function (response) {
+                 
                   if(response.data.length === 0){
                     setEmpty(true)
                   }
                   else{
-                  axios.post('http://localhost:80/product',response.data)
+                  axios.post('http://localhost:80/product',[response.data,user])
                   .then(function(response) {
                     setData(response.data)
                   })

@@ -60,7 +60,9 @@ function formatDate(date) {
   const handleChange = (event) =>{
     setQuantity(event.target.value);
   }
-  const handleClick = () => {
+  const handleClick = (event) => {
+            event.preventDefault();
+            console.log("death to america");
             if("ID" in Userdata){
             let balance = Userdata.Cash_Balance
             if(data.Quantity_Available <=0){
@@ -107,7 +109,7 @@ function formatDate(date) {
 
     return(
       <div class ="productBody">
-
+        <form onSubmit={handleClick}>
         <section class="py-5 productFrame">
             <div class="container px-4 px-lg-5 my-5">
                 <div class="row gx-4 gx-lg-5 align-items-center">
@@ -124,16 +126,17 @@ function formatDate(date) {
                         
                         <div class="d-flex">
                             <div class="buttons"> 
-                            
                             {data.Quantity_Available >0?<input pkaceholder="quantity" style={{width:'100px',height:'43px',paddingBottom:'7px',marginRight:'10px'}} classsName="quantity-chooser" onChange={handleChange} value={Quantity} type="number" min="1" max={data.Quantity_Available} id="quantity" name="Quantity" required/>:null}
-                             <button onClick={handleClick} class="btn btn-warning btn-long buy">Buy it Now</button>  </div>
+                             <button class="btn btn-warning btn-long buy">Buy it Now</button>  </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <script src="js/scripts.js"></script>
+        </form>
       </div>
       
     );

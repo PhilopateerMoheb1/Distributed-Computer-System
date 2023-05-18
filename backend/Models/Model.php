@@ -54,9 +54,9 @@ class Model
 		$stmt->execute($arr);
 		return $stmt->fetchAll();
 	}
-	public function getByInTransaction($col, $In)
+	public function getByInTransaction($col, $In,$BID)
 	{
-		$sql = "SELECT * FROM " . $this->name . ",transaction" . " WHERE " . "product.PID" . " IN" . $In . " AND transaction.PID = product.PID;";
+		$sql = "SELECT * FROM " . $this->name . ",transaction" . " WHERE " . "product.PID" . " IN" . $In . " AND transaction.PID = product.PID AND transaction.BID = ".$BID.";";
 		$stmt = $this->pdo3->prepare($sql);
 		$arr = [];
 		array_push($arr, $In);

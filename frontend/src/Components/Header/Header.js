@@ -46,7 +46,7 @@ export default function Header(){
 
     const handleLogout = (event) => {
         axios.get('http://localhost:80/logout').then(function (response) {
-            window.location = "./";
+            window.location = "/";
         });
     }
 
