@@ -52,9 +52,21 @@ $router->get("/products/{productID}", function ($args) {
     echo json_encode($productmodel->getBy("PID", str_replace("%20", " ", $args["productID"])));
 });
 
-$router->get("/getproducts", function ($args) {
+$router->get("/getproducts", function () {
     $productmodel = new products();
     echo json_encode($productmodel->getAlldb3());
+});
+$router->post("/getSellers", function () {
+    $SellerModel = new sellers();
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    echo json_encode($SellerModel->getBYdb1("ID", $_POST));
+});
+$router->post("/payseller", function () {
+    $SellerModel = new sellers();
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    $SellerModel->Updatedb1($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
 });
 
 $router->post("/delete", function ($args) {
@@ -65,16 +77,17 @@ $router->post("/delete", function ($args) {
 
 
 $router->post("/newtransaction", function () {
-    $usermodel = new users();
+    $SellerModel = new sellers();
+    $BuyersModel = new buyers();
     $productmodel = new products();
     // echo json_encode($usermodel->getAll());
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
     if ($_POST[0] == "Cash_Balance") {
         if ($_SESSION['Role'] == "Seller") {
-            $usermodel->Updatedb1($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
+            $SellerModel->Updatedb1($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
         } else {
-            $usermodel->Updatedb2($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
+            $BuyersModel->Updatedb2($_POST[0], $_POST[1], $_POST[2], $_POST[3]);
         }
         if (isset($_SESSION["Cash_Balance"])) {
             $_SESSION["Cash_Balance"] = $_POST[1];

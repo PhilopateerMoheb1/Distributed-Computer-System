@@ -16,13 +16,13 @@ export default function Header(){
 
     axios.defaults.withCredentials = true;
 
-    const [range, setRange] = React.useState([0, 1000]);
+    const [range, setRange] = React.useState([0, 15000]);
     const [inputs,setInputs] = useState({});
     const [data,setData] = useState({});
     const navigate = useNavigate();
 
     useEffect(()=>{
-        setInputs(values => ({...values,["range"]: [0, 1000]}));
+        setInputs(values => ({...values,["range"]: [0, 15000]}));
         setInputs(values => ({...values,["category"]: "all"}));
         setInputs(values => ({...values,["search"]: ""}));
         axios.get('http://localhost:80/session')     
@@ -126,7 +126,7 @@ export default function Header(){
                             aria-label="Search"
                             />
                             <div className="styled" style = {{ width: "20%"}}>
-                                <Slider className="slider" style={{zIndex:"99"}} value = {range} min={0} max={1000} onChange = {handleChanges} valueLabelDisplay="auto"/>
+                                <Slider className="slider" style={{zIndex:"99"}} value = {range} min={0} max={15000} onChange = {handleChanges} valueLabelDisplay="auto"/>
                             </div>
                             <button type="submit" className="Header-Button btn mx-auto">Search</button>  
                             </Form>
