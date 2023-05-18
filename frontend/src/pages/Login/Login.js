@@ -14,7 +14,6 @@ export default function Login(){
     const [inputs,setInputs] = useState({});
     const [data,setData] = useState([]);
 
-
     useEffect(()=>{
         setInputs(values => ({...values,["range"]: [0, 1000]}));
         axios.get('http://localhost:80/session').then(
@@ -38,10 +37,7 @@ export default function Login(){
 
     const [passwordShown, setPasswordShown] = useState(false);
 
-    // Password toggle handler
     const togglePassword = () => {
-        // When the handler is invoked
-        // inverse the boolean state of passwordShown
         setPasswordShown(!passwordShown);
     };
 
@@ -79,6 +75,8 @@ export default function Login(){
                         <div className="mb-3">
                             <label for="exampleInputPassword1" className="form-label login_label">Password</label>
                             <input onChange={handleChange} type={passwordShown ? "text" : "password"} name="upassword" className="form-control" id="exampleInputPassword1"  required/>
+                            {!passwordShown?<i onClick ={togglePassword} class="field-icon fa-solid fa-eye"></i>
+                            :<i onClick={togglePassword} class="field-icon fa-solid fa-eye-slash"></i>}
                         </div>
                         
                         <div className="mb-3 justify-content-center login-form-actions">

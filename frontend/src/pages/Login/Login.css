@@ -62,3 +62,12 @@
 .new-user-register{
     margin-top: 1rem;
 }
+
+.field-icon{
+    float: right;
+  margin-left: -30px;
+  margin-right: 10px;
+  margin-top: -30px;
+  position: relative;
+  z-index: 2;
+}

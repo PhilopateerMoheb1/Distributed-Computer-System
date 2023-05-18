@@ -53,9 +53,9 @@ function Footer() {
 
                         <div className="col-md-4 col-sm-6 col-xs-12">
                             <ul className="social-icons">
-                                <li><a className="facebook" href="#"><i className="fa fa-facebook"></i></a></li>
-                                <li><a className="twitter" href="#"><i className="fa fa-twitter"></i></a></li>
-                                <li><a className="instagram" href="#"><i className="fa fa-instagram"></i></a></li>
+                                <li><a className="facebook" href="https://www.facebook.com/Amazon/"><i className="fa fa-facebook"></i></a></li>
+                                <li><a className="twitter" href="https://twitter.com/amazon#"><i className="fa fa-twitter"></i></a></li>
+                                <li><a className="instagram" href="https://www.instagram.com/amazon/"><i className="fa fa-instagram"></i></a></li>
                             </ul>
                         </div>
                     </div>

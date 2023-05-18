@@ -26,7 +26,7 @@ export default function UserInfo(props){
         <div class="col-3" style={{paddingLeft: "50px"}}>
           <div class="list-group" id="list-tab" role="tablist">
             <a class="list-group-item list-group-item-action active" id="list-home-list" data-bs-toggle="list" href="./userInfo" role="tab" aria-controls="list-home">User Info</a>
-            <a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="./orders" role="tab" aria-controls="list-profile">Your Listings</a>
+            {showYourListings?<a class="list-group-item list-group-item-action" id="list-profile-list" data-bs-toggle="list" href="./orders" role="tab" aria-controls="list-profile">Your Listings</a>:null}
             <a class="list-group-item list-group-item-action" id="list-messages-list" data-bs-toggle="list" href="./transactions" role="tab" aria-controls="list-messages">Transactions</a>
             
           </div>

@@ -3,12 +3,14 @@ import swal from 'sweetalert2'
 import React, { useEffect, useState,useRef} from "react";
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../Product.css'
 
 
 function Product(props){
   const [Userdata,setUserData] = useState({});
   const [Sellerdata,setSellerData] = useState({});
   const [data,setProductData] = useState([]);
+  const [Quantity,setQuantity] = useState(0);
   var pathname = window.location.pathname
   pathname = pathname.substring(pathname.lastIndexOf("/"))
   const URL = "http://localhost:80/products" + pathname
@@ -55,6 +57,9 @@ function formatDate(date) {
 }
 
   axios.defaults.withCredentials = true;
+  const handleChange = (event) =>{
+    setQuantity(event.target.value);
+  }
   const handleClick = () => {
             if("ID" in Userdata){
             let balance = Userdata.Cash_Balance
@@ -65,12 +70,12 @@ function formatDate(date) {
                 'error'
               )
             }
-            else if(balance>=data.Product_Price){
-                let inputs = ["Cash_Balance",Userdata.Cash_Balance-data.Product_Price,"ID",Userdata.ID]
+            else if(parseInt(balance)>=(parseInt(data.Product_Price)*parseInt(Quantity))){
+                let inputs = ["Cash_Balance",parseInt(Userdata.Cash_Balance)-parseInt(data.Product_Price)*parseInt(Quantity),"ID",Userdata.ID]
                 axios.post('http://localhost:80/newtransaction',inputs);
-                inputs = ["Cash_Balance",parseInt(Sellerdata[0].Cash_Balance)+parseInt(data.Product_Price),"ID",data.SID];
+                inputs = ["Cash_Balance",parseInt(Sellerdata[0].Cash_Balance)+parseInt(data.Product_Price)*parseInt(Quantity),"ID",data.SID];
                 axios.post('http://localhost:80/payseller',inputs);
-                inputs = ["Quantity_Available",data.Quantity_Available-1,"Product_Name",data.Product_Name]
+                inputs = ["Quantity_Available",data.Quantity_Available-Quantity,"Product_Name",data.Product_Name]
                 axios.post('http://localhost:80/newtransaction',inputs);
                 let TransactionInputs = {PID:data.PID, BID:Userdata.ID, SID:data.SID, Transaction_Date:formatDate(new Date())};
                 axios.post('http://localhost:80/transaction',TransactionInputs);
@@ -116,8 +121,12 @@ function formatDate(date) {
                             {data.Quantity_Available >0? <p>Quantity Available: {data.Quantity_Available}</p>:<p style={{"color":"red"}}>Out of Stock!</p>}
                         </div>
                         <p class="lead">{props.description}</p>
+                        
                         <div class="d-flex">
-                            <div class="buttons">  <button onClick={handleClick} class="btn btn-warning btn-long buy">Buy it Now</button>  </div>
+                            <div class="buttons"> 
+                            
+                            {data.Quantity_Available >0?<input pkaceholder="quantity" style={{width:'100px',height:'43px',paddingBottom:'7px',marginRight:'10px'}} classsName="quantity-chooser" onChange={handleChange} value={Quantity} type="number" min="1" max={data.Quantity_Available} id="quantity" name="Quantity" required/>:null}
+                             <button onClick={handleClick} class="btn btn-warning btn-long buy">Buy it Now</button>  </div>
                         </div>
                     </div>
                 </div>
