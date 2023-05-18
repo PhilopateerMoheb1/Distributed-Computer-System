@@ -16,11 +16,14 @@
 }
 
 .Empty{
-  color: white;
-  font-family:cursive;
-  font-size: 4em;
+  color: black;
+  font-size: 2rem;
   text-align: center;
 }
 
-
+.icon-action-listing{
+  cursor: pointer;
+  padding: 5px;
+  color:black
+}
 

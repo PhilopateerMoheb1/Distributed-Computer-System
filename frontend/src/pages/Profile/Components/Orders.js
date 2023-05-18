@@ -28,6 +28,8 @@ export default function Orders(){
 
   );
 },[]);
+
+
     return(
       <div class="row" style={{paddingTop: "50px", paddingBottom: "50px"}}>
         <div class="col-3" style={{paddingLeft: "50px"}}>
@@ -52,6 +54,7 @@ export default function Orders(){
                 
                   return(
                       <OrdersCard name = {dataItem.Product_Name}
+                      pid={dataItem.PID}
                       category = {dataItem.Category}
                       description = {dataItem.Product_Description}
                       img = {dataItem.Product_Picture}

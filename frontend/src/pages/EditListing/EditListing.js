@@ -1,22 +1,26 @@
 import React, { useEffect, useState,useRef } from "react";
-import "./AddListing.css"
+import "./EditListing.css"
 import ImageUpload from "../../Components/ImageUpload"
 import axios from 'axios';
 import swal from 'sweetalert2'
 
 
-export default function AddListing(){
+export default function EditListing(){
 
-    const [inputs,setInputs] = useState({});
-    const [userID,setID] = useState(); 
+    const [Productdata,setData] = useState([]);
+    //const [userID,setID] = useState(); 
     axios.defaults.withCredentials = true;
+    var pathname = window.location.pathname;
+    pathname = pathname.substring(pathname.lastIndexOf("/"));
+    const URL = "http://localhost:80/products" + pathname
     useEffect(()=>{
-        setInputs(values => ({...values,["Category"]: "all"}));
         axios.get('http://localhost:80/session').then(
             (response) => {
                 console.log(response)
                 if("ID" in response.data && response.data.Role === "Seller"){
-                    setID(response.data.ID)
+                    axios.get(URL).then(function (response) {
+                        setData(response.data[0]);
+                    })
                 }
                 else{
                     window.location = "/login";
@@ -24,7 +28,7 @@ export default function AddListing(){
             }
         );
     },[]);
-
+    console.log(Productdata);
     const handleSelect = (event) => {
         const name = event.target.name;
         const id = event.target.id;
@@ -32,54 +36,52 @@ export default function AddListing(){
         var value = document.getElementById(id).value;
         console.log(value);       
 
-        setInputs(values => ({...values,[name]: value}));
+        setData(values => ({...values,[name]: value}));
     }
 
     const handleChange = (event) => {
         const name = event.target.name;
         const value = event.target.value;
-             
-        setInputs(values => ({...values,[name]: value}));
+        setData(values => ({...values,[name]: value}));
     }
 
     const handleSubmit = (event) =>{
         event.preventDefault();
-        console.log(inputs)
-        axios.post('http://localhost:80/upload',inputs).then(function (response) {
+        axios.post('http://localhost:80/edit',Productdata).then(function (response) {
         });
         swal.fire({
             title: "Done!",
-            text: 'Listing Added!',
+            text: 'Listing Edited!',
             icon: 'success'
         }).then(function() {
-            window.location = "http://localhost:3000/";
+            window.location = "http://localhost:3000/orders";
         });
     }
 
     return(
-        <div className="AddListing">
-            <form className="AddListing-form" onSubmit={handleSubmit}>
+        <div className="EditListing">
+            <form className="EditListing-form" onSubmit={handleSubmit}>
         
-                <h1>Add Listing</h1>
+                <h1>Edit Listing</h1>
                 
                 <fieldset>
                 
                 <legend><span class="number">1</span> Product info</legend>
                 
                 <label for="name">Name:</label>
-                <input onChange={handleChange} type="text" id="name" name="Product_Name" required/>
+                <input value={Productdata.Product_Name} onChange={handleChange} type="text" id="name" name="Product_Name" required/>
                 
                 <label for="price">Price:</label>
-                <input onChange={handleChange} type="number" min="1" max="1000" id="price" name="Product_Price" required/>
+                <input value={Productdata.Product_Price} onChange={handleChange} type="number" min="0" max="1000" id="price" name="Product_Price" required/>
                 
                 <label for="quantity">Quantity Available:</label>
-                <input onChange={handleChange} type="number" id="quantity" min="1" max="1000" name="Quantity_Available" required/>
+                <input value={Productdata.Quantity_Available} onChange={handleChange} type="number" id="quantity" min="0" max="1000" name="Quantity_Available" required/>
                 
                 <label for="description">Description:</label>
-                <textarea onChange={handleChange} id="description" name="Product_Description" required></textarea>
+                <textarea value={Productdata.Product_Description} onChange={handleChange} id="description" name="Product_Description" required></textarea>
 
                 <label for="category">Category:</label>
-                <select onChange={handleSelect} id="category" name="Category" required>
+                <select value={Productdata.Category} onChange={handleSelect} id="category" name="Category" required>
                     <option value="all">All</option>
                     <option value="devices">Devices</option>
                     <option value="fashion">Fashion</option>
@@ -108,18 +110,19 @@ export default function AddListing(){
                 <fieldset>
                 
                 <legend><span class="number">2</span> Product picture</legend>
-        
-                
-                <label>Upload:</label>
+                <div className="old-picture-container">
+                <img className="old-picture" src={Productdata.Product_Picture} alt="current picture"/>
+                </div>
+                <label>Update:</label>
                 <ImageUpload
                     callback={(data) => { 
-                        setInputs(values => ({...values,["Product_Picture"]: data}));
+                        setData(values => ({...values,["Product_Picture"]: data}));
                     }}
                 />
                 
                 </fieldset>
                 
-                <button type="submit">Add Listing</button>
+                <button type="submit">Edit Listing</button>
                 
             </form>
         </div>

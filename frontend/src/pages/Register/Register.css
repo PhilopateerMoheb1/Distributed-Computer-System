@@ -43,6 +43,12 @@
     color:#fff
 }
 
+.register_form_btn:disabled{
+    background-color: #E28904;
+    filter: brightness(50%);
+    color:#fff
+}
+
 .register_body{
     background-color:#E3E6E6;
 }

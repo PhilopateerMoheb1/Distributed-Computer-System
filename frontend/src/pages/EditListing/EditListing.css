@@ -1,0 +1,130 @@
+.EditListing {
+    height: auto;
+    width: auto;
+    font-family: 'Nunito', sans-serif;
+    color: #384047;
+}
+  
+  
+  .EditListing-form {
+    max-width: 300px;
+    margin: 10px auto;
+    padding: 10px 20px;
+    margin-top: 130px;
+    background: #f4f7f8;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px #333;
+  }
+  
+  .EditListing-form h1 {
+    margin: 0 0 30px 0;
+    text-align: center;
+  }
+  
+  .EditListing-form input[type="text"],
+  .EditListing-form input[type="password"],
+  .EditListing-form input[type="date"],
+  .EditListing-form input[type="datetime"],
+  .EditListing-form input[type="email"],
+  .EditListing-form input[type="number"],
+  .EditListing-form input[type="search"],
+  .EditListing-form input[type="tel"],
+  .EditListing-form input[type="time"],
+  .EditListing-form input[type="url"],
+  .EditListing-form textarea,
+  .EditListing-form select {
+    background: rgba(255,255,255,0.1);
+    border: none;
+    font-size: 16px;
+    height: auto;
+    margin: 0;
+    outline: 0;
+    padding: 15px;
+    width: 100%;
+    background-color: #e8eeef;
+    color: #8a97a0;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.03) inset;
+    margin-bottom: 30px;
+  }
+  
+  .EditListing-form input[type="radio"],
+  .EditListing-form input[type="checkbox"] {
+    margin: 0 4px 8px 0;
+  }
+  
+  .EditListing-form select {
+    padding: 6px;
+    height: 32px;
+    border-radius: 2px;
+  }
+  
+  .EditListing-form button {
+    padding: 19px 39px 18px 39px;
+    color: #FFF;
+    background-color: #E28904;
+    font-size: 18px;
+    text-align: center;
+    font-style: normal;
+    border-radius: 5px;
+    width: 100%;
+    border: 1px solid #E28904;
+    border-width: 1px 1px 3px;
+    box-shadow: 0 -1px 0 rgba(255,255,255,0.1) inset;
+    margin-bottom: 10px;
+  }
+
+  .EditListing-form button:hover {
+    background-color: #E28904;
+    filter: brightness(85%);
+  }
+  
+  .EditListing-form fieldset {
+    margin-bottom: 30px;
+    border: none;
+  }
+  
+  .EditListing-form legend {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+  }
+  
+  .EditListing-form label {
+    display: block;
+    margin-bottom: 8px;
+  }
+  
+  .EditListing-form label.light {
+    font-weight: 300;
+    display: inline;
+  }
+  
+  .EditListing-form .number {
+    background-color: #E28904;
+    color: #fff;
+    height: 30px;
+    width: 30px;
+    display: inline-block;
+    font-size: 0.8em;
+    margin-right: 4px;
+    line-height: 30px;
+    text-align: center;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.2);
+    border-radius: 100%;
+  }
+
+  .old-picture{
+    max-width: 300px;
+    justify-content: center;
+  }
+  .old-picture-container{
+    text-align: center;
+  }
+  
+  @media screen and (min-width: 480px) {
+  
+    .EditListing-form  {
+      max-width: 480px;
+    }
+  
+  }
+  

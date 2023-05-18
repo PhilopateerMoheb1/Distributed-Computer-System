@@ -11,6 +11,7 @@ import Home from "./pages/Home/Home"
 import Product from "./pages/Product/Product"
 import CreditCard from "./pages/CreditCard/Credit"
 import AddListing from "./pages/AddListing/AddListing"
+import EditListing from './pages/EditListing/EditListing';
 import UserInfoPage from './pages/Profile/UserInfoPage';
 import OrdersInfoPage from './pages/Profile/OrdersInfoPage';
 import TransactionsPage from './pages/Profile/TransactionsPage';
@@ -27,6 +28,7 @@ const router = createBrowserRouter(
       <Route index element = {<Home/>}/>
       <Route path="/CreditCard"  element = {<CreditCard/>}/>
       <Route path="/AddListing"  element = {<AddListing/>}/>
+      <Route path="/EditListing/:pid"  element = {<EditListing/>}/>
       <Route path="/userInfo"  element = {<UserInfoPage/>}/>
       <Route path="/transactions"  element = {<TransactionsPage/>}/>
       <Route path="/orders"  element = {<OrdersInfoPage/>}/>

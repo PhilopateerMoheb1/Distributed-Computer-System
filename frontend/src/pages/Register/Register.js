@@ -11,6 +11,15 @@ export default function Register(){
     axios.defaults.withCredentials = true;
 
     useEffect(()=>{
+        setInputs(values => ({...values,["Name"]: ""}));
+        setInputs(values => ({...values,["Email"]: ""}));
+        setInputs(values => ({...values,["Address"]: ""}));
+        setInputs(values => ({...values,["Phone_Number"]: ""}));
+        setInputs(values => ({...values,["DOB"]: ""}));
+        setInputs(values => ({...values,["Gender"]: ""}));
+        setInputs(values => ({...values,["Role"]: ""}));
+        setInputs(values => ({...values,["Password"]: ""}));
+        setInputs(values => ({...values,["ConfirmPassword"]: ""}));
         axios.get('http://localhost:80/session').then(
             (response) => {
                 var objectConstructor = ({}).constructor;
@@ -94,14 +103,14 @@ export default function Register(){
                             <div className="col-md-6">
                                 <div className="mb-3">
                                     <label for="reg_name" className="form-label register_label">Full Name</label>
-                                    <input onChange={handleChange} type="text" className="form-control" id="reg_Name" name="Name"
+                                    <input value={inputs.Name} onChange={handleChange} type="text" className="form-control" id="reg_Name" name="Name"
                                     placeholder="full name" required pattern="[A-Za-z][A-Za-z\s]*[A-Za-z]$" title="Name can have charachters and spaces only"/>
                                     
                                 </div>
 
                                 <div className="mb-3">
                                     <label for="reg_email" className="form-label register_label">Email address</label>
-                                    <input onChange={handleChange} type="email" className="form-control" id="reg_Email" aria-describedby="emailHelp"
+                                    <input value={inputs.Email} onChange={handleChange} type="email" className="form-control" id="reg_Email" aria-describedby="emailHelp"
                                     name="Email" placeholder="Email address" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="invalid email" />
                                                 
 
@@ -109,20 +118,20 @@ export default function Register(){
                                 
                                 <div className="mb-3">
                                     <label for="street-address" className="form-label register_label">Street address</label>
-                                    <input onChange={handleChange} type="text" className="form-control" id="street-address" name="Address"
+                                    <input value={inputs.Address} onChange={handleChange} type="text" className="form-control" id="street-address" name="Address"
                                     autocomplete="street-address" pattern="\S(.*\S)?" title="This field is required" placeholder="street address" required/>                        
                                 </div>
 
                                 <div className="mb-3">
                                     <label for="reg_phone" className="form-label register_label">Phone number</label>
-                                    <input onChange={handleChange} type="tel" className="form-control" id="reg_phone" name="Phone_Number"
+                                    <input value={inputs.Phone_Number} onChange={handleChange} type="tel" className="form-control" id="reg_phone" name="Phone_Number"
                                     placeholder="Phone number" required pattern="^(010|011|012|015|\+2010|\+2011|\+2012|\+2015)[0-9]{8}$" title="invalid phone number"/>
                                      {showPassowrdMissmatch? <p style={{"color":"transparent"}}>passwords must match</p>:null}
                                 </div>
                                 
                                 <div className="mb-3">
                                     <label for="reg_birthday" className="form-label register_label" >Birthday:</label>
-                                    <input onChange={handleChange} type="date" className="form-control" id="reg_birthday" name="DOB" required
+                                    <input value={inputs.DOB} onChange={handleChange} type="date" className="form-control" id="reg_birthday" name="DOB" required
                                     min="1905-01-01" max="2005-12-31"/>   
                             </div>
                             </div>   
@@ -130,7 +139,7 @@ export default function Register(){
                                 <div className="mb-3">
                                     <label for="reg_gender" className="form-label register_label">Gender</label>
 
-                                    <select onChange={handleSelect} id="reg_gender_select" className="form-select" aria-label="Default select example"
+                                    <select value={inputs.Gender} onChange={handleSelect} id="reg_gender_select" className="form-select" aria-label="Default select example"
                                     name="Gender" required title="field required">
                                         <option value ="" selected disabled hidden>Choose...</option>
                                         <option value="Male">Male</option>
@@ -142,10 +151,10 @@ export default function Register(){
 
                                 <div className="form-group mb-3">
                                     <label for="reg_Role" className="form-label register_label">Role</label>
-                                    <select onChange={handleSelect} id="reg_role_select" className="form-select" aria-label="Default select example" name="Role" required title="field required">
+                                    <select  value={inputs.Role} onChange={handleSelect} id="reg_role_select" className="form-select" aria-label="Default select example" name="Role" required title="field required">
                                         <option value ="" selected disabled hidden>Choose...</option>
-                                        <option>User</option>
-                                        <option>Seller</option>
+                                        <option value="User">User</option>
+                                        <option value="Seller">Seller</option>
                                     </select>
 
 
@@ -153,7 +162,7 @@ export default function Register(){
 
                                 <div className="mb-3">
                                     <label for="exampleInputPassword1" className="form-label register_label">Password</label>
-                                    <input onChange={handleChange} type="password" name="Password" className="form-control" id="exampleInputPassword1" placeholder="Password" required
+                                    <input value={inputs.Password} onChange={handleChange} type="password" name="Password" className="form-control" id="exampleInputPassword1" placeholder="Password" required
                                     pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters"
                                     />
                                 
@@ -163,13 +172,15 @@ export default function Register(){
                                     
                                     <label for="exampleInputPassword1" className="form-label register_label">Confirm Password</label>
                                     
-                                    <input onChange={handleChange} type="password" name="ConfirmPassword" className="form-control" id="exampleInputPassword1" placeholder="Confirm Password" required/>
+                                    <input value={inputs.ConfirmPassword} onChange={handleChange} type="password" name="ConfirmPassword" className="form-control" id="exampleInputPassword1" placeholder="Confirm Password" required/>
                                     
                                     {showPassowrdMissmatch? <p style={{"color":"red"}}>passwords must match</p>:null}
                                 </div>
 
                                 <div className="mb-3 justify-content-center align-items-center register-form-actions">
-                                    <button type="submit" className="btn register_form_btn">Register</button>                            
+                                {inputs.ConfirmPassword === inputs.Password? <button  type="submit" className="btn register_form_btn">Register</button>:
+                                <button disabled type="submit" className="btn register_form_btn">Register</button>}
+                                                                
                                     <div className="old-user-login">
                                             Have An Account?
                                     </div>
