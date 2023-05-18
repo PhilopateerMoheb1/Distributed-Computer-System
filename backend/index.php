@@ -57,6 +57,11 @@ $router->get("/getproducts", function ($args) {
     echo json_encode($productmodel->getAlldb3());
 });
 
+$router->post("/delete", function ($args) {
+    $productmodel = new products();
+    $productmodel->Deletedb3("PID", $_POST["PID"]);
+});
+
 
 
 $router->post("/newtransaction", function () {
@@ -150,16 +155,27 @@ $router->get("/logout", function () {
     session_destroy();
 });
 
+$router->post("/edit", function () {
+    $_POST = json_decode(file_get_contents('php://input'));
+    $_POST = convert_object_to_array($_POST);
+    $image = $_POST["Product_Picture"];
+    $DIR = "./images/";
+    $file_chunks = explode(";base64,", $image);
+    $fileType = explode("image/", $file_chunks[0]);
+    $image_type = $fileType[1];
+    $base64Img = base64_decode($file_chunks[1]);
+    $id = uniqid();
+    $file = $DIR . $id . "." . $image_type;
+    file_put_contents($file, $base64Img);
+    $_POST["Product_Picture"] = "http://localhost/images/" . $id . "." . $image_type;
+    $productmodel = new products();
+    $productmodel->Updatedb3($_POST["Product_Name"], $_POST["Product_Price"], $_POST["Quantity_Available"], $_POST["Category"], $_POST["Product_Description"], $_POST["Product_Picture"], "PID", $_POST["PID"]);
+});
+
 $router->post("/upload", function () {
     $_POST = json_decode(file_get_contents('php://input'));
     $_POST = convert_object_to_array($_POST);
     $_POST["SID"] = $_SESSION["ID"];
-    $name = $_POST["Product_Name"];
-    $price = $_POST["Product_Price"];
-    $quantity = $_POST["Quantity_Available"];
-    $description = $_POST["Product_Description"];
-    $category = $_POST["Category"];
-    echo $category;
     $image = $_POST["Product_Picture"];
     $DIR = "./images/";
     $file_chunks = explode(";base64,", $image);

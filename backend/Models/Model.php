@@ -45,18 +45,18 @@ class Model
 		$stmt->execute($arr);
 		return $stmt->fetchAll();
 	}
-	public function getByInTransaction($col,$In)
+	public function getByInTransaction($col, $In)
 	{
-		$sql = "SELECT * FROM " . $this->name.",transaction" . " WHERE " . "product.PID" . " IN". $In." AND transaction.PID = product.PID;";
+		$sql = "SELECT * FROM " . $this->name . ",transaction" . " WHERE " . "product.PID" . " IN" . $In . " AND transaction.PID = product.PID;";
 		$stmt = $this->pdo3->prepare($sql);
 		$arr = [];
 		array_push($arr, $In);
 		$stmt->execute();
 		return $stmt->fetchAll();
 	}
-	public function getByIn($col,$In)
+	public function getByIn($col, $In)
 	{
-		$sql = "SELECT * FROM " . $this->name.",transaction" . " WHERE " . "product.PID" . " IN". $In." AND transaction.PID = product.PID;";
+		$sql = "SELECT * FROM " . $this->name . ",transaction" . " WHERE " . "product.PID" . " IN" . $In . " AND transaction.PID = product.PID;";
 		$stmt = $this->pdo3->prepare($sql);
 		$arr = [];
 		array_push($arr, $In);
@@ -68,12 +68,11 @@ class Model
 	public function getLike($regex, $category, $min, $max)
 	{
 		$arr = [];
-		if($category === "all"){
+		if ($category === "all") {
 			$sql = "SELECT * FROM " . $this->name . " WHERE (Product_Price BETWEEN " . $min . " AND " . $max . ") AND Product_Name LIKE ?;";
-			$stmt = $this->pdo3->prepare($sql);		
+			$stmt = $this->pdo3->prepare($sql);
 			array_push($arr, $regex);
-		}
-		else{
+		} else {
 			$sql = "SELECT * FROM " . $this->name . " WHERE  Category =? AND (Product_Price BETWEEN " . $min . " AND " . $max . ") AND Product_Name LIKE ?;";
 			$stmt = $this->pdo3->prepare($sql);
 			array_push($arr, $category);
@@ -159,6 +158,28 @@ class Model
 		echo $sql;
 		$stmt = $this->pdo2->prepare($sql);
 		$stmt->execute([$update]);
+	}
+
+	public function Updatedb3($name, $price, $quantity, $category, $description, $picture, $where, $wherevalue)
+	{
+		$arr = [];
+		$sql = "UPDATE " . $this->name . " SET Product_Name =?,  Product_Price =?, Quantity_Available =?,  Category =?, Product_Description =?, Product_Picture =? WHERE " . $where . "=" . "'" . $wherevalue . "'";
+		array_push($arr, $name);
+		array_push($arr, $price);
+		array_push($arr, $quantity);
+		array_push($arr, $category);
+		array_push($arr, $description);
+		array_push($arr, $picture);
+		$stmt = $this->pdo3->prepare($sql);
+		$stmt->execute($arr);
+	}
+
+	public function Deletedb3($where, $wherevalue)
+	{
+		$sql = "Delete From " . $this->name . " WHERE " . $where . "=" . "'" . $wherevalue . "'";
+		echo $sql;
+		$stmt = $this->pdo3->prepare($sql);
+		$stmt->execute();
 	}
 }
 ?>
