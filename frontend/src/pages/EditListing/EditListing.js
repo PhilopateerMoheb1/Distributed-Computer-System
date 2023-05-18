@@ -72,10 +72,10 @@ export default function EditListing(){
                 <input value={Productdata.Product_Name} onChange={handleChange} type="text" id="name" name="Product_Name" required/>
                 
                 <label for="price">Price:</label>
-                <input value={Productdata.Product_Price} onChange={handleChange} type="number" min="0" max="1000" id="price" name="Product_Price" required/>
+                <input value={Productdata.Product_Price} onChange={handleChange} type="number" min="1" max="15000" id="price" name="Product_Price" required/>
                 
                 <label for="quantity">Quantity Available:</label>
-                <input value={Productdata.Quantity_Available} onChange={handleChange} type="number" id="quantity" min="0" max="1000" name="Quantity_Available" required/>
+                <input value={Productdata.Quantity_Available} onChange={handleChange} type="number" id="quantity" min="1" max="15000" name="Quantity_Available" required/>
                 
                 <label for="description">Description:</label>
                 <textarea value={Productdata.Product_Description} onChange={handleChange} id="description" name="Product_Description" required></textarea>

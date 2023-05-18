@@ -70,7 +70,7 @@ export default function AddListing(){
                 <input onChange={handleChange} type="text" id="name" name="Product_Name" required/>
                 
                 <label for="price">Price:</label>
-                <input onChange={handleChange} type="number" min="0" max="15000" id="price" name="Product_Price" required/>
+                <input onChange={handleChange} type="number" min="1" max="15000" id="price" name="Product_Price" required/>
                 
                 <label for="quantity">Quantity Available:</label>
                 <input onChange={handleChange} type="number" id="quantity" min="1" max="1000" name="Quantity_Available" required/>
